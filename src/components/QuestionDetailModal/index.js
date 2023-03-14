@@ -1,20 +1,28 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import './questionDetailModal.css';
 import closeIcon from '../../assets/icons/close-icon.svg';
 import QuestionDetailItem from '../QuestionDetailItem';
 import { useOutside } from '../../utils/help';
-import { question } from '../../fakeData/question';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchQuestion, questionSelector } from '../../features/exam/questionSlice';
 
-const QuestionDetailModal = ({ handleQuestionDetailModal, questionGroupId }) => {
+const QuestionDetailModal = ({ handleQuestionDetailModal, examId, setQuestionNumber }) => {
+  const dispatch = useDispatch();
   const wrapperRef = useRef(null);
   useOutside(wrapperRef, handleQuestionDetailModal);
-  const questionRender = question.filter((item) => questionGroupId === item.questionGroupId);
+  const question = useSelector(questionSelector);
+  const questionRender = question.filter((item) => examId === item.examId);
+
+  useEffect(() => {
+    dispatch(fetchQuestion());
+    setQuestionNumber(questionRender.length);
+  }, [questionRender]);
   return (
     <div className='questionDetailModal'>
       <div className='questionDetailModal__box' ref={wrapperRef}>
         <div className='questionDetailModal__header'>
           <span>Dịch vụ nâng mũi</span>
-          10 Câu hỏi
+          {questionRender.length} Câu hỏi
         </div>
         <div className='questionDetailModal__close' onClick={handleQuestionDetailModal}>
           <img width={20} height={20} src={closeIcon} alt='' />

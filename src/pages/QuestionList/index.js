@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Search from '../../components/Search';
 import plusIcon from '../../assets/icons/plus-icon.svg';
 import './questionList.css';
 import QuestionItem from '../../components/QuestionItem';
-import { questionGroup } from '../../fakeData/question';
+import { useDispatch, useSelector } from 'react-redux';
+import { examSelector, fetchExam } from '../../features/exam/examSlice';
 
 const QuestionList = () => {
+  const dispatch = useDispatch();
+  const exam = useSelector(examSelector);
+
+  useEffect(() => {
+    dispatch(fetchExam());
+  }, []);
   return (
     <div className='questionList'>
       <div className='questionList__header'>
-        <span>Danh sách câu hỏi</span>3 bộ câu hỏi
+        <span>Danh sách câu hỏi</span>
+        {exam.length} bộ câu hỏi
       </div>
       <div className='questionList__custom'>
         <div className='questionList__search'>
@@ -22,7 +30,7 @@ const QuestionList = () => {
         </div>
       </div>
       <div className='questionList__table'>
-        {questionGroup.map((item, idx) => (
+        {exam.map((item, idx) => (
           <QuestionItem key={item._id} {...item} />
         ))}
       </div>

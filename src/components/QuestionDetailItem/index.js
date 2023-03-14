@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { answerSelector, fetchAnswer } from '../../features/exam/answerSlice';
 import AnswerItem from '../AnswerItem';
 import ConfirmModal from '../ConfirmModal';
 import './questionDetailItem.css';
 
 const QuestionDetailItem = (props) => {
+  const dispatch = useDispatch();
   const [isOpenAcc, setIsOpenAcc] = useState(false);
   const [isEditQuestion, setIsEditQuestion] = useState(false);
   const [isDeleteQuestion, setIsDeleteQuestion] = useState(false);
   const [question, setQuestion] = useState(props.question);
+  const answer = useSelector(answerSelector);
+
+  const renderAnswer = answer.filter((item) => item.questionId === props._id);
 
   const handleIsOpenAcc = () => {
     setIsOpenAcc(!isOpenAcc);
@@ -21,6 +27,9 @@ const QuestionDetailItem = (props) => {
   const handleEditQuestion = (e) => {
     setQuestion(e.target.value);
   };
+  useEffect(() => {
+    dispatch(fetchAnswer());
+  }, []);
   return (
     <div className='questionDetailItem'>
       <div className='questionDetailItem__card'>
@@ -56,8 +65,8 @@ const QuestionDetailItem = (props) => {
       {isOpenAcc && (
         <div className='questionDetailItem__acc'>
           <ul>
-            {props.answer.map((item, idx) => (
-              <AnswerItem key={idx} number={idx + 1} answer={item} />
+            {renderAnswer.map((item, idx) => (
+              <AnswerItem key={idx} number={idx + 1} answer={item.answer} />
             ))}
           </ul>
         </div>
