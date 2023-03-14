@@ -63,3 +63,4 @@ export default authReducer;
 export const messageSelector = (state) => state.auth.message;
 export const currentUserSelector = (state) => state.auth.currentUser;
 export const loggedSelector = (state) => state.auth.logged;
+export const loggingSelector = (state) => state.auth.logging;

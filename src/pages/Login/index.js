@@ -4,9 +4,10 @@ import loginPic from '../../assets/images/login-pic.webp';
 import phoneIcon from '../../assets/icons/phone-icon.svg';
 import lockIcon from '../../assets/icons/lock-icon.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLogin, loggedSelector, messageSelector } from '../../features/auth/authSlice';
+import { getLogin, loggedSelector, loggingSelector, messageSelector } from '../../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { URL } from '../../router';
+import Loading from '../../components/Loading';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const Login = () => {
   const [note, setNote] = useState('');
   const message = useSelector(messageSelector);
   const logged = useSelector(loggedSelector);
+  const logging = useSelector(loggingSelector);
 
   const changeInputVal = (e) => {
     setLogin({ ...login, [e.target.name]: e.target.value });
@@ -29,8 +31,8 @@ const Login = () => {
     dispatch(getLogin({ phone: login.phonenumber, password: login.password }));
   };
   useEffect(() => {
-    if (localStorage.getItem('access_token')) navigate('/cp/app-servey-admin');
-    if (logged) navigate(URL);
+    if (localStorage.getItem('access_token')) navigate(`${URL}/`);
+    if (logged) navigate(`${URL}/`);
     setNote(message);
   }, [message, logged, navigate]);
 
@@ -72,6 +74,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      {logging && <Loading />}
     </div>
   );
 };

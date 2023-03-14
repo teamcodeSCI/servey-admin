@@ -6,12 +6,6 @@ import { menu, URL } from './router';
 import ProtectedRoute from './router/ProtectedRoute';
 
 function App() {
-  const location = useLocation();
-  if (location.pathname === URL) {
-    console.log('URL: ', URL);
-    console.log('location.pathname: ', location.pathname);
-  }
-
   return (
     <Routes>
       <Route path={`${URL}/login`} element={<Login />} />
