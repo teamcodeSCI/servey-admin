@@ -9,6 +9,7 @@ import { getLogout } from '../../features/auth/authSlice';
 
 const Sidebar = () => {
   const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const navLinkClass = ({ isActive }) => (isActive ? 'sidebar__active' : '');
   const handleLogout = () => {

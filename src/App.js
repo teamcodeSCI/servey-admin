@@ -1,11 +1,17 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Login from './pages/Login';
 import Home from './layout/Home';
 import { menu, URL } from './router';
 import ProtectedRoute from './router/ProtectedRoute';
 
 function App() {
+  const location = useLocation();
+  if (location.pathname === URL) {
+    console.log('URL: ', URL);
+    console.log('location.pathname: ', location.pathname);
+  }
+
   return (
     <Routes>
       <Route path={`${URL}/login`} element={<Login />} />
@@ -22,7 +28,7 @@ function App() {
         ))}
       </Route>
 
-      <Route element={'Page Not Found'} />
+      <Route path={URL} element={<Navigate to={`${URL}/`} />} />
     </Routes>
   );
 }
