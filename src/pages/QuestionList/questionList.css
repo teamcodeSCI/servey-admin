@@ -1,0 +1,40 @@
+.questionList__header{
+    margin-bottom: 20px;
+}
+.questionList__header>span{
+    font-size: 26px;
+    font-weight: 500;
+    display: block;
+}
+.questionList__custom{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.questionList__addNew{
+    width: fit-content;
+    align-self: stretch;
+
+}
+.questionList__addNew>button{
+    width: 36.5px;
+    height: 36.5px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: linear-gradient(118deg,#227ff4,#227ff4b2);
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0px 1px 5px 0px rgba(34, 127, 244,0.7);
+    transition: all 0.2s linear;
+}
+.questionList__addNew>button:hover{
+    box-shadow: 0px 1px 7px 0px rgba(34, 127, 244,1);
+}
+
+.questionList__addNew>button>img{
+    display: block;
+    width: 25px;
+    height: auto;
+}

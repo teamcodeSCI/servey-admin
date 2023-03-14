@@ -1,0 +1,87 @@
+.questionDetailItem {
+    margin-bottom: 10px;
+}
+
+.questionDetailItem__card {
+    background: #fff;
+    border-radius: 9px;
+    color: #686868;
+    padding: 10px 20px;
+    box-shadow: 0px 1px 5px 0px rgb(0 0 0 / 20%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+}
+
+.questionDetailItem__title {
+    position: relative;
+    font-weight: 600;
+    font-size: 14px;
+    width: 100%;
+}
+.questionDetailItem__title>textarea {
+    font-size: 14px;
+    width: 100%;
+padding: 5px 10px;
+border: 1px solid #ccc;
+border-radius: 9px;
+font-weight: 500;
+outline: none;
+resize: vertical;
+min-height: 33px;
+}
+
+.questionDetailItem__action{
+    display: flex;
+    gap: 10px;
+}
+.questionDetailItem__action>button{
+    padding: 0;
+    border: none;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: all 0.2s linear;
+    display: block;
+}
+.questionDetailItem__viewMore{
+    background: url(../../assets/icons/arrowDown-icon.svg) center 0 no-repeat;
+    background-size: 100%;
+}
+.questionDetailItem__edit{
+    background: url(../../assets/icons/edit-icon.svg) center 0 no-repeat;
+    background-size: 100%;
+}
+.questionDetailItem__close{
+    background: url(../../assets/icons/closeActive-icon.svg) center 0 no-repeat;
+    background-size: 100%;
+}
+.questionDetailItem__save{
+    background: url(../../assets/icons/check-icon.svg) center 0 no-repeat;
+    background-size: 100%;
+}
+.questionDetailItem__edit:hover{
+    background: url(../../assets/icons/editActive-icon.svg) center 0 no-repeat;
+}
+.questionDetailItem__delete{
+    background: url(../../assets/icons/delete-icon.svg) center 0 no-repeat;
+    background-size: 100%;
+}
+.questionDetailItem__delete:hover{
+    background: url(../../assets/icons/deleteActive-icon.svg) center 0 no-repeat;
+}
+.questionDetailItem__acc{
+    overflow: hidden;
+}
+.questionDetailItem__acc>ul{
+    padding: 10px 20px 10px 10px;
+    border-radius: 9px;
+    margin: 5px 0 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+   font-size: 14px;
+   gap: 5px;
+}

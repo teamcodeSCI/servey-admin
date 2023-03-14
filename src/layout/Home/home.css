@@ -1,0 +1,10 @@
+.home{
+    background: #f7f7f7;
+    display: flex;
+}
+.home__main{
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 40px;
+    overflow: auto;
+}

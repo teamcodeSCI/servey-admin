@@ -1,0 +1,66 @@
+.answerItem{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   background: #fff;
+    padding: 5px 10px;
+    border-radius: 9px;
+    gap: 10px;
+}
+.answerItem:hover{
+    background: #efefef;
+}
+.answerItem:hover .answerItem__control{
+    display: flex;
+}
+.answerItem__control{
+    display: none;
+    gap: 10px;
+}   
+.answerItem span{
+    width: 95%;
+  display: flex;
+  gap: 5px;
+align-items: center;
+}
+.answerItem textarea{
+    font-size: 14px;
+    width: 100%;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+   
+    outline: none;
+    resize: vertical;
+    min-height: 33px;
+}
+.answerItem__control>button{
+    display: block;
+    border: none;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: all 0.2s linear;
+}
+.answerItem__edit{
+    background: url(../../assets/icons/edit-icon.svg) center 0 no-repeat;
+    background-size: 100%;
+}
+.answerItem__edit:hover{
+    background: url(../../assets/icons/editActive-icon.svg) center 0 no-repeat;
+}
+.answerItem__delete{
+    background: url(../../assets/icons/delete-icon.svg) center 0 no-repeat;
+    background-size: 100%;
+}
+.answerItem__delete:hover{
+    background: url(../../assets/icons/deleteActive-icon.svg) center 0 no-repeat;
+}
+.answerItem__close{
+    background: url(../../assets/icons/closeActive-icon.svg) center 0 no-repeat;
+    background-size: 100%;
+}
+.answerItem__save{
+    background: url(../../assets/icons/check-icon.svg) center 0 no-repeat;
+    background-size: 100%;
+}
