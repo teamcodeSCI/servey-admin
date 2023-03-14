@@ -10,7 +10,7 @@ function App() {
     <Routes>
       <Route path={`${URL}/login`} element={<Login />} />
       <Route
-        path={URL}
+        path={`${URL}/`}
         element={
           <ProtectedRoute>
             <Home />
