@@ -1,16 +1,13 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { URL } from '../router/index';
 
-const ProtectedRoute = ({ element, children, ...rest }) => {
+const ProtectedRoute = ({ children }) => {
   let auth = Boolean(localStorage.getItem('access_token'));
   if (!auth) {
-    return <Redirect to={'/login'} />;
+    return <Navigate to={`${URL}/login`} replace />;
   }
-  return (
-    <Route element={element} {...rest}>
-      {children}
-    </Route>
-  );
+  return children;
 };
 
 export default ProtectedRoute;

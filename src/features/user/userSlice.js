@@ -20,7 +20,7 @@ const userSlice = createSlice({
       });
   },
 });
-export const fetchUser = createAsyncThunk('user/fetchUSer', async () => {
+export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
   const response = await fetch('https://jsonplaceholder.typicode.com/users');
   const data = await response.json();
   return data;

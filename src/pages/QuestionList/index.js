@@ -1,20 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Search from '../../components/Search';
 import plusIcon from '../../assets/icons/plus-icon.svg';
 import './questionList.css';
 import QuestionItem from '../../components/QuestionItem';
 import { questionGroup } from '../../fakeData/question';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchUser, userSelector } from '../../features/user/userSlice';
 
 const QuestionList = () => {
-  const dispatch = useDispatch();
-  const user = useSelector(userSelector);
-  console.log('user: ', user);
-
-  useEffect(() => {
-    dispatch(fetchUser());
-  }, []);
   return (
     <div className='questionList'>
       <div className='questionList__header'>
