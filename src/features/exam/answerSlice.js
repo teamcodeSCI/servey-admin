@@ -11,6 +11,10 @@ const answerSlice = createSlice({
     addNewAnswer(state, action) {
       state.answerList.push(action.payload);
     },
+    deleteAnswer(state, action) {
+      console.log('action: ', action);
+      state.answerList = state.answerList.filter((item) => item._id !== action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder

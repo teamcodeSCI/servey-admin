@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { answerAction } from '../../features/exam/answerSlice';
 import ConfirmModal from '../ConfirmModal';
 import './answerItem.css';
 
-const AnswerItem = ({ number, answer }) => {
+const AnswerItem = ({ number, answer, answerId }) => {
+  const dispatch = useDispatch();
   const [isEditAnswer, setIsEditAnswer] = useState(false);
   const [isDeleteAnswer, setIsDeleteAnswer] = useState(false);
   const [editAnswer, setEditAnswer] = useState(answer);
@@ -14,6 +17,10 @@ const AnswerItem = ({ number, answer }) => {
   };
   const handleIsDeleteAnswer = () => {
     setIsDeleteAnswer(!isDeleteAnswer);
+  };
+  const deleteAnswer = () => {
+    dispatch(answerAction.deleteAnswer(answerId));
+    handleIsDeleteAnswer();
   };
   return (
     <li className='answerItem' style={isEditAnswer ? { background: '#efefef' } : {}}>
@@ -42,7 +49,7 @@ const AnswerItem = ({ number, answer }) => {
         )}
         <button className='answerItem__delete' onClick={handleIsDeleteAnswer}></button>
       </div>
-      {isDeleteAnswer && <ConfirmModal handleConfirmModal={handleIsDeleteAnswer} />}
+      {isDeleteAnswer && <ConfirmModal action={deleteAnswer} handleConfirmModal={handleIsDeleteAnswer} />}
     </li>
   );
 };

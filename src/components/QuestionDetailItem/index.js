@@ -31,6 +31,7 @@ const QuestionDetailItem = (props) => {
   const addNewAnswer = () => {
     dispatch(answerAction.addNewAnswer({ _id: uuidv4(), questionId: props._id, answer: '' }));
   };
+
   useEffect(() => {
     dispatch(fetchAnswer());
   }, []);
@@ -70,7 +71,7 @@ const QuestionDetailItem = (props) => {
         <div className='questionDetailItem__acc'>
           <ul>
             {renderAnswer.map((item, idx) => (
-              <AnswerItem key={idx} number={idx + 1} answer={item.answer} />
+              <AnswerItem key={idx} number={idx + 1} answer={item.answer} answerId={item._id} />
             ))}
             <div className='questionDetailItem__addNew'>
               <button onClick={addNewAnswer}>+</button>
@@ -78,7 +79,7 @@ const QuestionDetailItem = (props) => {
           </ul>
         </div>
       )}
-      {isDeleteQuestion && <ConfirmModal handleConfirmModal={handleIsDeleteQuestion} />}
+      {isDeleteQuestion && <ConfirmModal action={''} handleConfirmModal={handleIsDeleteQuestion} />}
     </div>
   );
 };
