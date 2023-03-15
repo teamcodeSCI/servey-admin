@@ -21,9 +21,12 @@
 
 .questionDetailModal__header {
     margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
-.questionDetailModal__header>span {
+.questionDetailModal__header span {
     font-size: 24px;
     display: block;
 }
@@ -46,4 +49,59 @@
 .questionDetailModal__wrapper {
     overflow-y: overlay;
     height: 500px;
+}
+.questionDetailModal__addNew{
+   margin-right: 20px;
+}
+.questionDetailModal__addNew>button::before{
+    content:'+';
+    margin-right: 5px;
+}
+.questionDetailModal__addNew>button{
+    border-radius: 4px;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #464444;
+    color: #464444;
+    transition: all 0.2s linear;
+    padding: 3px 10px;
+}
+.questionDetailModal__addNew>button:hover{
+    color: #fff;
+    background: #464444;
+}
+
+.questionDetailModal__header span>button{
+    border: none;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    transition: all 0.2s linear;
+    padding: 0;
+    margin-left: 10px;
+}
+.questionDetailModal__header span>input{
+   padding: 2px 10px;
+   border: 1px solid #ccc;
+   border-radius: 8px;
+
+}
+
+.questionDetailModal__edit{
+    background: url(../../assets/icons/edit-icon.svg) center 0 no-repeat;
+    background-size: 100%;
+   
+}
+.questionDetailModal__edit:hover{
+    background: url(../../assets/icons/editActive-icon.svg) center 0 no-repeat;
+}
+
+.questionDetailModal__cancel{
+    background: url(../../assets/icons/closeActive-icon.svg) center 0 no-repeat;
+    background-size: 100%;
+    
+}
+.questionDetailModal__save{
+    background: url(../../assets/icons/check-icon.svg) center 0 no-repeat;
+    background-size: 100%;
 }

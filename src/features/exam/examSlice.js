@@ -7,6 +7,11 @@ const examSlice = createSlice({
     loading: false,
     examList: [],
   },
+  reducers: {
+    addExam(state, action) {
+      state.examList.push(action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchExam.pending, (state, action) => {
@@ -24,7 +29,8 @@ const examSlice = createSlice({
 export const fetchExam = createAsyncThunk('exam/fetchExam', async () => {
   return exam;
 });
+export const addExam = createAsyncThunk('exam/addExam', async () => {});
 const examReducer = examSlice.reducer;
 export default examReducer;
-
+export const examAction = examSlice.actions;
 export const examSelector = (state) => state.exam.examList;

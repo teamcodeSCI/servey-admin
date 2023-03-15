@@ -7,6 +7,11 @@ const questionSlice = createSlice({
     loading: false,
     questionList: [],
   },
+  reducers: {
+    addNewQuestion(state, action) {
+      state.questionList.push(action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchQuestion.pending, (state, action) => {
@@ -24,7 +29,8 @@ const questionSlice = createSlice({
 export const fetchQuestion = createAsyncThunk('question/fetchQuestion', async () => {
   return question;
 });
+export const addNewQuestion = createAsyncThunk('question/addNewQuestion', async () => {});
 const questionReducer = questionSlice.reducer;
 export default questionReducer;
-
+export const questionAction = questionSlice.actions;
 export const questionSelector = (state) => state.question.questionList;

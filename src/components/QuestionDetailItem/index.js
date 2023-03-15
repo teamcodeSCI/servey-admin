@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { answerSelector, fetchAnswer } from '../../features/exam/answerSlice';
+import { v4 as uuidv4 } from 'uuid';
+import { answerAction, answerSelector, fetchAnswer } from '../../features/exam/answerSlice';
 import AnswerItem from '../AnswerItem';
 import ConfirmModal from '../ConfirmModal';
 import './questionDetailItem.css';
@@ -26,6 +27,9 @@ const QuestionDetailItem = (props) => {
   };
   const handleEditQuestion = (e) => {
     setQuestion(e.target.value);
+  };
+  const addNewAnswer = () => {
+    dispatch(answerAction.addNewAnswer({ _id: uuidv4(), questionId: props._id, answer: '' }));
   };
   useEffect(() => {
     dispatch(fetchAnswer());
@@ -68,6 +72,9 @@ const QuestionDetailItem = (props) => {
             {renderAnswer.map((item, idx) => (
               <AnswerItem key={idx} number={idx + 1} answer={item.answer} />
             ))}
+            <div className='questionDetailItem__addNew'>
+              <button onClick={addNewAnswer}>+</button>
+            </div>
           </ul>
         </div>
       )}

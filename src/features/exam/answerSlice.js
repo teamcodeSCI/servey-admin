@@ -7,6 +7,11 @@ const answerSlice = createSlice({
     loading: false,
     answerList: [],
   },
+  reducers: {
+    addNewAnswer(state, action) {
+      state.answerList.push(action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAnswer.pending, (state, action) => {
@@ -26,5 +31,6 @@ export const fetchAnswer = createAsyncThunk('answer/fetchAnswer', async () => {
 });
 const answerReducer = answerSlice.reducer;
 export default answerReducer;
+export const answerAction = answerSlice.actions;
 
 export const answerSelector = (state) => state.answer.answerList;

@@ -2,14 +2,17 @@ import React, { useEffect } from 'react';
 import Search from '../../components/Search';
 import plusIcon from '../../assets/icons/plus-icon.svg';
 import './questionList.css';
+import { v4 as uuidv4 } from 'uuid';
 import QuestionItem from '../../components/QuestionItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { examSelector, fetchExam } from '../../features/exam/examSlice';
+import { examAction, examSelector, fetchExam } from '../../features/exam/examSlice';
 
 const QuestionList = () => {
   const dispatch = useDispatch();
   const exam = useSelector(examSelector);
-
+  const addExam = () => {
+    dispatch(examAction.addExam({ _id: uuidv4(), name: '' }));
+  };
   useEffect(() => {
     dispatch(fetchExam());
   }, []);
@@ -24,7 +27,7 @@ const QuestionList = () => {
           <Search />
         </div>
         <div className='questionList__addNew'>
-          <button>
+          <button onClick={addExam}>
             <img width={15} height={15} src={plusIcon} alt='' />
           </button>
         </div>
