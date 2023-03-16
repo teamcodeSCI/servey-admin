@@ -10,14 +10,17 @@ import NewExamModal from '../../components/NewExamModal';
 const QuestionList = () => {
   const dispatch = useDispatch();
   const [isAddExam, setIsAddExam] = useState(false);
+  const [search, setSearch] = useState('');
   const exam = useSelector(examSelector);
-
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
   const handleAddExam = () => {
     setIsAddExam(!isAddExam);
   };
   useEffect(() => {
-    dispatch(fetchExam());
-  }, [dispatch]);
+    dispatch(fetchExam(search));
+  }, [dispatch, search]);
   return (
     <div className='questionList'>
       <div className='questionList__header'>
@@ -26,7 +29,7 @@ const QuestionList = () => {
       </div>
       <div className='questionList__custom'>
         <div className='questionList__search'>
-          <Search />
+          <Search search={search} handleSearch={handleSearch} />
         </div>
         <div className='questionList__addNew'>
           <button onClick={handleAddExam}>

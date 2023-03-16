@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { exam } from '../../fakeData/exam';
+import { removeAccents } from '../../utils/help';
 
 const examSlice = createSlice({
   name: 'exam',
@@ -26,8 +27,10 @@ const examSlice = createSlice({
       });
   },
 });
-export const fetchExam = createAsyncThunk('exam/fetchExam', async () => {
-  return exam;
+export const fetchExam = createAsyncThunk('exam/fetchExam', async (filter) => {
+  const search = removeAccents(filter);
+  if (search === '') return exam;
+  return exam.filter((item) => removeAccents(item.name).search(search) !== -1);
 });
 export const addExam = createAsyncThunk('exam/addExam', async () => {});
 const examReducer = examSlice.reducer;

@@ -43,6 +43,7 @@ const QuestionDetailItem = (props) => {
       return;
     }
     dispatch(answerAction.addNewAnswer({ _id: uuidv4(), questionId: props._id, answer: newAnswer }));
+    setNewAnswer('');
     handleAddAnswer();
   };
   const deleteQuestion = () => {};

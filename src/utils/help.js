@@ -24,6 +24,12 @@ export const useOutside = (ref, func) => {
   }, [ref, func]);
 };
 
-/**
- * Component that alerts if you click outside of it
- */
+export const removeAccents = (str) => {
+  const string = str || '';
+  return string
+    .normalize('NFD')
+    .toLowerCase()
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd')
+    .replace(/Đ/g, 'D');
+};

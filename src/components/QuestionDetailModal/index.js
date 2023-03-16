@@ -77,7 +77,10 @@ const QuestionDetailModal = ({ handleQuestionDetailModal, questionRender, examId
           {questionRender.map((item, idx) => (
             <QuestionDetailItem key={item._id} {...item} idx={idx} />
           ))}
-          <div className='questionDetailModal__newItem'>
+          <div
+            className='questionDetailModal__newItem'
+            style={isAddQuestion ? {} : { paddingTop: 5, paddingBottom: 5 }}
+          >
             {isAddQuestion ? (
               <div className='questionDetailModal__editting'>
                 <textarea
