@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import './questionDetailModal.css';
 import closeIcon from '../../assets/icons/close-icon.svg';
@@ -38,6 +38,13 @@ const QuestionDetailModal = ({ handleQuestionDetailModal, questionRender, examId
   const handleSetTitle = (e) => {
     setTitle(e.target.value);
   };
+  useEffect(() => {
+    if (questionRender.length === 0) {
+      setIsAddQuestion(true);
+      return;
+    }
+    setIsAddQuestion(false);
+  }, [questionRender]);
   return (
     <div className='questionDetailModal'>
       <div className='questionDetailModal__box' ref={wrapperRef}>
@@ -71,7 +78,7 @@ const QuestionDetailModal = ({ handleQuestionDetailModal, questionRender, examId
             <QuestionDetailItem key={item._id} {...item} idx={idx} />
           ))}
           <div className='questionDetailModal__newItem'>
-            {isAddQuestion || questionRender.length === 0 ? (
+            {isAddQuestion ? (
               <div className='questionDetailModal__editting'>
                 <textarea
                   rows={1}
