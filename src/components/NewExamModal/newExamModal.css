@@ -1,0 +1,68 @@
+.newExamModal{
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 10;
+}
+.newExamModal__box{
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    background: #fff;
+    margin: 20vh auto 0;
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 10px 20px 20px 20px;
+}
+
+  
+.newExamModal__title{
+    font-size: 24px;
+    margin-bottom: 5px;
+
+}
+.newExamModal__close{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+}
+.newExamModal__close>img{
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.newExamModal__body{
+    margin-bottom: 10px;
+}
+.newExamModal__body>input{
+    font-size: 14px;
+    width: 100%;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    outline: none;
+}
+.newExamModal__footer{
+    display: flex;
+  
+    justify-content: flex-end;
+}
+.newExamModal__footer>button{
+    border-radius: 20px;
+    border: none;
+    padding: 7px 20px;
+    cursor: pointer;
+    color: #1961d3;
+    background: #fff;
+    font-size: 16px;
+    transition: all 0.2s linear;
+}
+.newExamModal__footer>button:hover{
+background: #f5f8fd
+}

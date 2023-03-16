@@ -9,12 +9,28 @@ import { questionAction } from '../../features/exam/questionSlice';
 
 const QuestionDetailModal = ({ handleQuestionDetailModal, questionRender, examId, examName }) => {
   const wrapperRef = useRef(null);
+  const inputRef = useRef(null);
   const dispatch = useDispatch();
   const [isEditTitle, setIsEditTitle] = useState(false);
+  const [isAddQuestion, setIsAddQuestion] = useState(false);
   const [title, setTitle] = useState(examName);
+  const [question, setQuestion] = useState('');
+
   useOutside(wrapperRef, handleQuestionDetailModal);
   const addNewItem = () => {
-    dispatch(questionAction.addNewQuestion({ _id: uuidv4(), examId: examId, question: '' }));
+    if (question === '') {
+      inputRef.current.style.borderColor = 'red';
+      return;
+    }
+    dispatch(questionAction.addNewQuestion({ _id: uuidv4(), examId: examId, question: question }));
+    handleAddQuestion();
+  };
+  const handleAddQuestion = () => {
+    setIsAddQuestion(!isAddQuestion);
+    setQuestion('');
+  };
+  const handleSetQuestion = (e) => {
+    setQuestion(e.target.value);
   };
   const handleEditTitle = () => {
     setIsEditTitle(!isEditTitle);
@@ -46,9 +62,6 @@ const QuestionDetailModal = ({ handleQuestionDetailModal, questionRender, examId
             </span>
             {questionRender.length} Câu hỏi
           </div>
-          <div className='questionDetailModal__addNew'>
-            <button onClick={addNewItem}>Thêm mới</button>
-          </div>
         </div>
         <div className='questionDetailModal__close' onClick={handleQuestionDetailModal}>
           <img width={20} height={20} src={closeIcon} alt='' />
@@ -57,6 +70,27 @@ const QuestionDetailModal = ({ handleQuestionDetailModal, questionRender, examId
           {questionRender.map((item, idx) => (
             <QuestionDetailItem key={item._id} {...item} idx={idx} />
           ))}
+          <div className='questionDetailModal__newItem'>
+            {isAddQuestion || questionRender.length === 0 ? (
+              <div className='questionDetailModal__editting'>
+                <textarea
+                  rows={1}
+                  placeholder='Nhập câu hỏi ...'
+                  ref={inputRef}
+                  onChange={handleSetQuestion}
+                  value={question}
+                ></textarea>
+                <div className='questionDetailModal__control'>
+                  <button onClick={addNewItem}>Lưu</button>
+                  <button onClick={handleAddQuestion}>Hủy</button>
+                </div>
+              </div>
+            ) : (
+              <div className='questionDetailModal__addBtn'>
+                <button onClick={handleAddQuestion}>+ Thêm mới</button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

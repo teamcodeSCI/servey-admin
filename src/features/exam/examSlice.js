@@ -33,4 +33,4 @@ export const addExam = createAsyncThunk('exam/addExam', async () => {});
 const examReducer = examSlice.reducer;
 export default examReducer;
 export const examAction = examSlice.actions;
-export const examSelector = (state) => state.exam.examList;
+export const examSelector = (state) => [...state.exam.examList].reverse();

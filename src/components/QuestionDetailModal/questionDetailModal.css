@@ -50,26 +50,7 @@
     overflow-y: overlay;
     height: 500px;
 }
-.questionDetailModal__addNew{
-   margin-right: 20px;
-}
-.questionDetailModal__addNew>button::before{
-    content:'+';
-    margin-right: 5px;
-}
-.questionDetailModal__addNew>button{
-    border-radius: 4px;
-    cursor: pointer;
-    background: #fff;
-    border: 1px solid #464444;
-    color: #464444;
-    transition: all 0.2s linear;
-    padding: 3px 10px;
-}
-.questionDetailModal__addNew>button:hover{
-    color: #fff;
-    background: #464444;
-}
+
 
 .questionDetailModal__header span>button{
     border: none;
@@ -104,4 +85,67 @@
 .questionDetailModal__save{
     background: url(../../assets/icons/check-icon.svg) center 0 no-repeat;
     background-size: 100%;
+}
+.questionDetailModal__newItem{
+    width: 99%;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 9px;
+    color: #686868;
+    padding: 10px 10px 10px 20px;
+    box-shadow: 0px 1px 5px 0px rgb(0 0 0 / 20%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+.questionDetailModal__editting{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+.questionDetailModal__editting>textarea{
+    font-size: 14px;
+    width: 100%;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-weight: 500;
+    outline: none;
+    resize: vertical;
+    min-height: 33px;
+}
+.questionDetailModal__control{
+display: flex;
+}
+.questionDetailModal__control>button{
+    border-radius: 12px;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #1961d3;
+    background: #fff;
+    font-size: 14px;
+    transition: all 0.2s linear;
+}
+.questionDetailModal__control>button:hover{
+    background: #f5f8fd;
+}
+.questionDetailModal__addBtn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.questionDetailModal__addBtn>button{
+    border-radius: 12px;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #1961d3;
+    background: #fff;
+    transition: all 0.2s linear;
+}
+.questionDetailModal__addBtn>button:hover{
+    background: #f5f8fd;
 }
