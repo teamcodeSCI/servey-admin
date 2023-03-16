@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { answerAction, answerSelector, fetchAnswer } from '../../features/exam/answerSlice';
@@ -8,10 +8,13 @@ import './questionDetailItem.css';
 
 const QuestionDetailItem = (props) => {
   const dispatch = useDispatch();
+  const answerInputRef = useRef(null);
   const [isOpenAcc, setIsOpenAcc] = useState(false);
   const [isEditQuestion, setIsEditQuestion] = useState(false);
+  const [isAddAnswer, setIsAddAnswer] = useState(false);
   const [isDeleteQuestion, setIsDeleteQuestion] = useState(false);
   const [question, setQuestion] = useState(props.question);
+  const [newAnswer, setNewAnswer] = useState('');
   const answer = useSelector(answerSelector);
 
   const renderAnswer = answer.filter((item) => item.questionId === props._id);
@@ -28,13 +31,24 @@ const QuestionDetailItem = (props) => {
   const handleEditQuestion = (e) => {
     setQuestion(e.target.value);
   };
-  const addNewAnswer = () => {
-    dispatch(answerAction.addNewAnswer({ _id: uuidv4(), questionId: props._id, answer: '' }));
+  const handleAddAnswer = () => {
+    setIsAddAnswer(!isAddAnswer);
   };
-
+  const handleNewAnswer = (e) => {
+    setNewAnswer(e.target.value);
+  };
+  const addNewAnswer = () => {
+    if (newAnswer === '') {
+      answerInputRef.current.style.borderColor = 'red';
+      return;
+    }
+    dispatch(answerAction.addNewAnswer({ _id: uuidv4(), questionId: props._id, answer: newAnswer }));
+    handleAddAnswer();
+  };
+  const deleteQuestion = () => {};
   useEffect(() => {
     dispatch(fetchAnswer());
-  }, []);
+  }, [dispatch]);
   return (
     <div className='questionDetailItem'>
       <div className='questionDetailItem__card'>
@@ -73,13 +87,29 @@ const QuestionDetailItem = (props) => {
             {renderAnswer.map((item, idx) => (
               <AnswerItem key={idx} number={idx + 1} answer={item.answer} answerId={item._id} />
             ))}
-            <div className='questionDetailItem__addNew'>
-              <button onClick={addNewAnswer}>+</button>
-            </div>
+            {isAddAnswer ? (
+              <div className='questionDetailItem__editting'>
+                <textarea
+                  rows={1}
+                  ref={answerInputRef}
+                  placeholder='Nhập câu hỏi ...'
+                  value={newAnswer}
+                  onChange={handleNewAnswer}
+                ></textarea>
+                <div className='questionDetailItem__control'>
+                  <button onClick={addNewAnswer}>Lưu</button>
+                  <button onClick={handleAddAnswer}>Hủy</button>
+                </div>
+              </div>
+            ) : (
+              <div className='questionDetailItem__addNewBtn'>
+                <button onClick={handleAddAnswer}>+</button>
+              </div>
+            )}
           </ul>
         </div>
       )}
-      {isDeleteQuestion && <ConfirmModal action={''} handleConfirmModal={handleIsDeleteQuestion} />}
+      {isDeleteQuestion && <ConfirmModal action={deleteQuestion} handleConfirmModal={handleIsDeleteQuestion} />}
     </div>
   );
 };
