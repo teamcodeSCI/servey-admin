@@ -22,6 +22,10 @@
   display: flex;
   gap: 5px;
 align-items: center;
+cursor: pointer;
+}
+.answerItem span>input[type='radio']{
+    cursor: pointer;
 }
 .answerItem textarea{
     font-size: 14px;

@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import ConfirmModal from '../ConfirmModal';
 import './answerItem.css';
 
-const AnswerItem = ({ number, answer, answerId }) => {
+const AnswerItem = ({ number, answer, isCorrect, questionId, answerId }) => {
   const [isEditAnswer, setIsEditAnswer] = useState(false);
   const [isDeleteAnswer, setIsDeleteAnswer] = useState(false);
   const [editAnswer, setEditAnswer] = useState(answer);
+
   const handleIsEditAnswer = () => {
     setIsEditAnswer(!isEditAnswer);
   };
@@ -18,9 +19,20 @@ const AnswerItem = ({ number, answer, answerId }) => {
   const deleteAnswer = () => {
     handleIsDeleteAnswer();
   };
+
   return (
-    <li className='answerItem' style={isEditAnswer ? { background: '#efefef' } : {}}>
+    <li
+      className='answerItem'
+      style={
+        isEditAnswer
+          ? { background: '#efefef' }
+          : isCorrect === true
+          ? { background: '#b6e5cf' }
+          : { background: 'none' }
+      }
+    >
       <span>
+        <input type='radio' name={questionId} defaultChecked={isCorrect} value={isCorrect} />
         {number}.
         {isEditAnswer ? (
           <textarea

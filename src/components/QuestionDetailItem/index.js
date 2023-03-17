@@ -16,7 +16,6 @@ const QuestionDetailItem = (props) => {
   const [question, setQuestion] = useState(props.question);
   const [newAnswer, setNewAnswer] = useState('');
   const answer = useSelector(answerSelector);
-
   const renderAnswer = answer.filter((item) => item.questionId === props._id);
 
   const handleIsOpenAcc = () => {
@@ -42,7 +41,7 @@ const QuestionDetailItem = (props) => {
       answerInputRef.current.style.borderColor = 'red';
       return;
     }
-    dispatch(answerAction.addNewAnswer({ _id: uuidv4(), questionId: props._id, answer: newAnswer }));
+    dispatch(answerAction.addNewAnswer({ _id: uuidv4(), questionId: props._id, answer: newAnswer, isCorrect: false }));
     setNewAnswer('');
     handleAddAnswer();
   };
@@ -86,7 +85,14 @@ const QuestionDetailItem = (props) => {
         <div className='questionDetailItem__acc'>
           <ul>
             {renderAnswer.map((item, idx) => (
-              <AnswerItem key={idx} number={idx + 1} answer={item.answer} answerId={item._id} />
+              <AnswerItem
+                key={idx}
+                number={idx + 1}
+                answer={item.answer}
+                questionId={item.questionId}
+                answerId={item._id}
+                isCorrect={item.isCorrect}
+              />
             ))}
             {isAddAnswer ? (
               <div className='questionDetailItem__editting'>
