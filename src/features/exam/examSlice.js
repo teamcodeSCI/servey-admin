@@ -37,7 +37,7 @@ const examSlice = createSlice({
 });
 export const fetchExam = createAsyncThunk('exam/fetchExam', async ({ filter, pageNum }) => {
   const search = removeAccents(filter);
-  const paginationLimit = 2;
+  const paginationLimit = 10;
   const data = search === '' ? exam : exam.filter((item) => removeAccents(item.name).search(search) !== -1);
   const pageCount = Math.ceil(data.length / paginationLimit);
 

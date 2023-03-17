@@ -25,3 +25,6 @@
     color: #FFF !important; 
     background: linear-gradient(118deg,#227ff4,#227ff4b2) !important
 }
+.pagination__btn{
+    font-size: 12px;
+}

@@ -25,15 +25,23 @@ const Pagination = ({ pageNum, setPageNum, pageCount, range }) => {
   };
   return (
     <ul className='pagination'>
-      <li onClick={firstPage}>❮❮</li>
-      <li onClick={prePage}>❮</li>
+      <li className='pagination__btn' onClick={firstPage}>
+        ❮❮
+      </li>
+      <li className='pagination__btn' onClick={prePage}>
+        ❮
+      </li>
       {pagiPage.map((item, idx) => (
         <li onClick={numPage} key={idx} className={pageNum === item ? 'pagination__active' : ''}>
           {item}
         </li>
       ))}
-      <li onClick={nextPage}>❯</li>
-      <li onClick={lastPage}>❯❯</li>
+      <li className='pagination__btn' onClick={nextPage}>
+        ❯
+      </li>
+      <li className='pagination__btn' onClick={lastPage}>
+        ❯❯
+      </li>
     </ul>
   );
 };
