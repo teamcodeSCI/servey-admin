@@ -1,11 +1,7 @@
 import React from 'react';
 import './loading.css';
-const Loading = () => {
-  return (
-    <div className='loading'>
-      <div className='loading__loader'></div>
-    </div>
-  );
+const Loading = ({ size, borderTopColor }) => {
+  return <div className='loading' style={{ width: size, height: size, borderTopColor: borderTopColor }}></div>;
 };
 
 export default Loading;

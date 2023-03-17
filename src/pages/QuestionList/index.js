@@ -4,10 +4,16 @@ import plusIcon from '../../assets/icons/plus-icon.svg';
 import './questionList.css';
 import QuestionItem from '../../components/QuestionItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { examSelector, fetchExam, pageCountSelector, rangeSelector } from '../../features/exam/examSlice';
+import {
+  examSelector,
+  fetchExam,
+  loadingSelector,
+  pageCountSelector,
+  rangeSelector,
+} from '../../features/exam/examSlice';
 import NewExamModal from '../../components/NewExamModal';
 import Pagination from '../../components/Pagination';
-
+import Loading from '../../components/Loading';
 const QuestionList = () => {
   const dispatch = useDispatch();
   const [pageNum, setPageNum] = useState(1);
@@ -15,6 +21,7 @@ const QuestionList = () => {
   const [search, setSearch] = useState('');
   const exam = useSelector(examSelector);
   const range = useSelector(rangeSelector);
+  const loading = useSelector(loadingSelector);
 
   const pageCount = useSelector(pageCountSelector);
   const handleSearch = (e) => {
@@ -42,7 +49,11 @@ const QuestionList = () => {
           </button>
         </div>
       </div>
-      {pageCount === 0 ? (
+      {loading ? (
+        <div className='questionList__loading'>
+          <Loading borderTopColor='#227ff4' size={40} />
+        </div>
+      ) : pageCount === 0 ? (
         <p className='questionList__notify'>Không có dữ liệu</p>
       ) : (
         <>

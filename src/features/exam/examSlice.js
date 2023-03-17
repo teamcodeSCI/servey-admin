@@ -56,7 +56,7 @@ export const addNewExam = createAsyncThunk('exam/addNewExam', async (newExam) =>
 });
 const examReducer = examSlice.reducer;
 export default examReducer;
-
+export const loadingSelector = (state) => state.exam.loading;
 export const examSelector = (state) => state.exam.examList;
 export const pageCountSelector = (state) => state.exam.pageCount;
 export const rangeSelector = (state) => state.exam.range;

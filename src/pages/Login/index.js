@@ -70,11 +70,18 @@ const Login = () => {
               />
             </div>
             {note !== '' ? <p>{note}</p> : ''}
-            <button onClick={handleLogin}>Đăng nhập</button>
+            <button style={logging ? { background: 'rgb(203 203 203)' } : {}} onClick={handleLogin}>
+              {logging ? (
+                <div className='login__loading'>
+                  <Loading size={27} borderTopColor={'#57b846'} />
+                </div>
+              ) : (
+                'Đăng nhập'
+              )}
+            </button>
           </div>
         </div>
       </div>
-      {logging && <Loading />}
     </div>
   );
 };
