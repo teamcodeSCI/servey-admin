@@ -4,14 +4,14 @@ import { removeAccents } from '../../utils/help';
 
 const examSlice = createSlice({
   name: 'exam',
+
   initialState: {
     loading: false,
+    limit: 2,
+    search: '',
+    pageCount: 0,
+    range: 7,
     examList: [],
-  },
-  reducers: {
-    addExam(state, action) {
-      state.examList.push(action.payload);
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -20,20 +20,43 @@ const examSlice = createSlice({
       })
       .addCase(fetchExam.fulfilled, (state, action) => {
         state.loading = false;
-        state.examList = action.payload;
+        state.examList = action.payload.data;
+        state.pageCount = action.payload.pageCount;
       })
       .addCase(fetchExam.rejected, (state, action) => {
         state.loading = false;
+      })
+      .addCase(addNewExam.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(addNewExam.fulfilled, (state, action) => {
+        state.loading = false;
+        state.examList.push(action.payload);
       });
   },
 });
-export const fetchExam = createAsyncThunk('exam/fetchExam', async (filter) => {
+export const fetchExam = createAsyncThunk('exam/fetchExam', async ({ filter, pageNum }) => {
   const search = removeAccents(filter);
-  if (search === '') return exam;
-  return exam.filter((item) => removeAccents(item.name).search(search) !== -1);
+  const paginationLimit = 2;
+  const data = search === '' ? exam : exam.filter((item) => removeAccents(item.name).search(search) !== -1);
+  const pageCount = Math.ceil(data.length / paginationLimit);
+
+  const prevRange = (pageNum - 1) * paginationLimit;
+  const currRange = pageNum * paginationLimit;
+  const renderData = [];
+  data.forEach((item, index) => {
+    if (index >= prevRange && index < currRange) {
+      renderData.push(item);
+    }
+  });
+  return { data: renderData, pageCount: pageCount };
 });
-export const addExam = createAsyncThunk('exam/addExam', async () => {});
+export const addNewExam = createAsyncThunk('exam/addNewExam', async (newExam) => {
+  return newExam;
+});
 const examReducer = examSlice.reducer;
 export default examReducer;
-export const examAction = examSlice.actions;
-export const examSelector = (state) => [...state.exam.examList].reverse();
+
+export const examSelector = (state) => state.exam.examList;
+export const pageCountSelector = (state) => state.exam.pageCount;
+export const rangeSelector = (state) => state.exam.range;

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { examAction } from '../../features/exam/examSlice';
 import { v4 as uuidv4 } from 'uuid';
+import { addNewExam } from '../../features/exam/examSlice';
 import { useOutside } from '../../utils/help';
 import './newExamModal.css';
 
@@ -20,7 +20,7 @@ const NewExamModal = ({ handleAddExam }) => {
       inputRef.current.style.borderColor = 'red';
       return;
     }
-    dispatch(examAction.addExam({ _id: uuidv4(), name: examTitle }));
+    dispatch(addNewExam({ _id: uuidv4(), name: examTitle }));
     handleAddExam();
   };
   return (

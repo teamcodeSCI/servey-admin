@@ -4,14 +4,19 @@ import plusIcon from '../../assets/icons/plus-icon.svg';
 import './questionList.css';
 import QuestionItem from '../../components/QuestionItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { examSelector, fetchExam } from '../../features/exam/examSlice';
+import { examSelector, fetchExam, pageCountSelector, rangeSelector } from '../../features/exam/examSlice';
 import NewExamModal from '../../components/NewExamModal';
+import Pagination from '../../components/Pagination';
 
 const QuestionList = () => {
   const dispatch = useDispatch();
+  const [pageNum, setPageNum] = useState(1);
   const [isAddExam, setIsAddExam] = useState(false);
   const [search, setSearch] = useState('');
   const exam = useSelector(examSelector);
+  const range = useSelector(rangeSelector);
+
+  const pageCount = useSelector(pageCountSelector);
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
@@ -19,8 +24,8 @@ const QuestionList = () => {
     setIsAddExam(!isAddExam);
   };
   useEffect(() => {
-    dispatch(fetchExam(search));
-  }, [dispatch, search]);
+    dispatch(fetchExam({ filter: search, pageNum: pageNum }));
+  }, [dispatch, search, pageNum]);
   return (
     <div className='questionList'>
       <div className='questionList__header'>
@@ -37,11 +42,21 @@ const QuestionList = () => {
           </button>
         </div>
       </div>
-      <div className='questionList__table'>
-        {exam.map((item, idx) => (
-          <QuestionItem key={item._id} {...item} />
-        ))}
-      </div>
+      {pageCount === 0 ? (
+        <p className='questionList__notify'>Không có dữ liệu</p>
+      ) : (
+        <>
+          <div className='questionList__table'>
+            {exam.map((item, idx) => (
+              <QuestionItem key={item._id} {...item} />
+            ))}
+          </div>
+          <div className='questionList__pagination'>
+            <Pagination pageNum={pageNum} setPageNum={setPageNum} pageCount={pageCount} range={range} />
+          </div>
+        </>
+      )}
+
       {isAddExam && <NewExamModal handleAddExam={handleAddExam} />}
     </div>
   );
