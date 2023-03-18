@@ -1,0 +1,52 @@
+.customerQuestionItem{
+    margin-bottom: 10px
+}
+.customerQuestionItem__card{
+    width: 99%;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 9px;
+    color: #686868;
+    padding: 10px 20px;
+    box-shadow: 0px 1px 5px 0px rgb(0 0 0 / 20%);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.customerQuestionItem__title{
+    font-weight: 600;
+}
+.customerQuestionItem__btn>button{
+    background: url(../../assets/icons/arrowDown-icon.svg) center 0 no-repeat;
+    background-size: 100%;
+    padding: 0;
+    border: none;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: all 0.2s linear;
+    display: block;
+}
+.customerQuestionItem__acc{
+    overflow: hidden;
+}
+.customerQuestionItem__acc>ul{
+    padding: 10px 20px 10px 10px;
+    border-radius: 9px;
+    margin: 5px 0 10px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    gap: 5px;
+}
+.customerQuestionItem__acc>ul>li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 5px 10px;
+    border-radius: 9px;
+    gap: 10px;
+}

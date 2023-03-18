@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import './customerModal.css';
 import closeIcon from '../../assets/icons/close-icon.svg';
 import { useOutside } from '../../utils/help';
+import CustomerQuestionItem from '../CustomerQuestionItem';
 
 const CustomerModal = ({ handleOpenModal }) => {
   const modalRef = useRef(null);
@@ -14,6 +15,9 @@ const CustomerModal = ({ handleOpenModal }) => {
         </div>
         <div class='customerModal__close' onClick={handleOpenModal}>
           <img width={20} height={20} src={closeIcon} alt='' />
+        </div>
+        <div className='customerModal__body'>
+          <CustomerQuestionItem />
         </div>
       </div>
     </div>

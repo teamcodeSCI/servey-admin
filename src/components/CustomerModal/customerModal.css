@@ -38,3 +38,7 @@
     font-size: 24px;
     display: block;
 }
+.customerModal__body{
+    overflow-y: overlay;
+    height: 500px;
+}
