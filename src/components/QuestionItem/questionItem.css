@@ -1,6 +1,5 @@
 .questionItem{
-    display: grid;
-     grid-template-columns: auto auto auto ;
+   display: flex;
     background: #fff;
     border-radius: 9px;
     color: #686868;
@@ -17,6 +16,12 @@
 }
 .questionItem:last-child{
     margin-bottom: 0;
+}
+.questionItem__title{
+    width: 100%;
+}
+.questionItem__number{
+    width: 100%;
 }
 .questionItem__action{
     position: absolute;

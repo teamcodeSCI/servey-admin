@@ -41,7 +41,7 @@ const QuestionList = () => {
       </div>
       <div className='questionList__custom'>
         <div className='questionList__search'>
-          <Search search={search} handleSearch={handleSearch} />
+          <Search placeholder='Tìm kiếm ...' search={search} handleSearch={handleSearch} />
         </div>
         <div className='questionList__addNew'>
           <button onClick={handleAddExam}>
