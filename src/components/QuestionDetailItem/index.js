@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAnswer, answerSelector, answerLoadingSelector } from '../../features/exam/answerSlice';
+import { deleteQuestion, updateQuestion } from '../../features/exam/questionSlice';
 import AnswerDetail from '../AnswerDetail';
 import ConfirmModal from '../ConfirmModal';
 
@@ -31,8 +32,14 @@ const QuestionDetailItem = (props) => {
   const handleEditQuestion = (e) => {
     setQuestion(e.target.value);
   };
-
-  const deleteQuestion = () => {};
+  const saveQuestion = () => {
+    dispatch(updateQuestion({ id: props.id, payload: question }));
+    handleIsEditQuestion();
+  };
+  const removeQuestion = () => {
+    dispatch(deleteQuestion(props.id));
+    handleIsDeleteQuestion();
+  };
 
   return (
     <div className='questionDetailItem'>
@@ -53,7 +60,7 @@ const QuestionDetailItem = (props) => {
           )}
         </div>
         <div className='questionDetailItem__action'>
-          {isEditQuestion && <button className='questionDetailItem__save' onClick={handleIsEditQuestion}></button>}
+          {isEditQuestion && <button className='questionDetailItem__save' onClick={saveQuestion}></button>}
           <button
             className={isEditQuestion ? 'questionDetailItem__close' : 'questionDetailItem__edit'}
             onClick={handleIsEditQuestion}
@@ -67,7 +74,7 @@ const QuestionDetailItem = (props) => {
         </div>
       </div>
       {props.index === props.idx && <AnswerDetail answer={answer} loading={answerLoading} />}
-      {isDeleteQuestion && <ConfirmModal action={deleteQuestion} handleConfirmModal={handleIsDeleteQuestion} />}
+      {isDeleteQuestion && <ConfirmModal action={removeQuestion} handleConfirmModal={handleIsDeleteQuestion} />}
     </div>
   );
 };

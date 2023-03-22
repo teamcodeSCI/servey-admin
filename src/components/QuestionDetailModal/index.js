@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+
 import './questionDetailModal.css';
 import closeIcon from '../../assets/icons/close-icon.svg';
 import QuestionDetailItem from '../QuestionDetailItem';
 import { useOutside } from '../../utils/help';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadingSelector, questionAction } from '../../features/exam/questionSlice';
+import { addNewQuestion, loadingSelector } from '../../features/exam/questionSlice';
 import Loading from '../Loading';
 import { updateExam } from '../../features/exam/examSlice';
 
@@ -25,7 +25,7 @@ const QuestionDetailModal = ({ handleQuestionDetailModal, questionRender, examId
       inputRef.current.style.borderColor = 'red';
       return;
     }
-    dispatch(questionAction.addNewQuestion({ _id: uuidv4(), examId: examId, question: question }));
+    dispatch(addNewQuestion({ exam_id: examId, question: question }));
     handleAddQuestion();
   };
   const handleAddQuestion = () => {

@@ -6,9 +6,7 @@ import AnswerItem from '../AnswerItem';
 import Loading from '../Loading';
 
 const AnswerDetail = ({ answer, loading }) => {
-  console.log('loading: ', loading);
   const answerInputRef = useRef(null);
-
   const [isAddAnswer, setIsAddAnswer] = useState(false);
   const [newAnswer, setNewAnswer] = useState('');
 
