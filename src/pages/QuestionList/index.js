@@ -20,6 +20,7 @@ const QuestionList = () => {
   const [isAddExam, setIsAddExam] = useState(false);
   const [search, setSearch] = useState('');
   const exam = useSelector(examSelector);
+
   const range = useSelector(rangeSelector);
   const loading = useSelector(loadingSelector);
 
@@ -59,7 +60,7 @@ const QuestionList = () => {
         <>
           <div className='questionList__table'>
             {exam.map((item, idx) => (
-              <QuestionItem key={item._id} {...item} />
+              <QuestionItem key={item.id} {...item} />
             ))}
           </div>
           <div className='questionList__pagination'>

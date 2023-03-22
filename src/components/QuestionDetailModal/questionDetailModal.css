@@ -50,6 +50,12 @@
     overflow-y: overlay;
     height: 500px;
 }
+.questionDetailModal__loading{
+    height: 500px;
+    display: flex;justify-content: center;
+    align-items: center;
+
+}
 
 
 .questionDetailModal__header span>button{

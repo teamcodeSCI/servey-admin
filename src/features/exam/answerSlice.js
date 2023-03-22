@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { answer } from '../../fakeData/answer';
+import { baseURL } from '../../utils/const';
 
 const answerSlice = createSlice({
   name: 'answer',
@@ -31,11 +31,14 @@ const answerSlice = createSlice({
       });
   },
 });
-export const fetchAnswer = createAsyncThunk('answer/fetchAnswer', async () => {
-  return answer;
+export const fetchAnswer = createAsyncThunk('answer/fetchAnswer', async (questionId) => {
+  const response = await fetch(`${baseURL}/answer?question_id=${questionId}`);
+  const data = await response.json();
+  return data.data;
 });
 const answerReducer = answerSlice.reducer;
 export default answerReducer;
 export const answerAction = answerSlice.actions;
 
 export const answerSelector = (state) => state.answer.answerList;
+export const answerLoadingSelector = (state) => state.answer.loading;
