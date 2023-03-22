@@ -98,7 +98,6 @@ export const deleteQuestion = createAsyncThunk('question/deleteQuestion', async 
     referrerPolicy: 'no-referrer',
   });
   const data = await response.json();
-  console.log('data: ', data);
   return data.data;
 });
 const questionReducer = questionSlice.reducer;
