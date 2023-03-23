@@ -1,7 +1,7 @@
 {
   "name": "servey-admin",
   "version": "0.1.0",
-  "homepage": "https://scigroup.com.vn/cp/app-servey-admin/",
+  "homepage": "https://app.scigroupvn.com/servey/servey-frontend/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",

@@ -2,7 +2,8 @@ import React from 'react';
 import CustomerList from '../pages/CustomerList';
 import QuestionList from '../pages/QuestionList';
 import Report from '../pages/Report';
-export const URL = '/cp/app-servey-admin';
+export const URL = '/servey/servey-frontend';
+
 export const menu = [
   {
     name: 'Câu hỏi',
