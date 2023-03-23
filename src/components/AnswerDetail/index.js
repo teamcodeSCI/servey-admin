@@ -4,23 +4,26 @@ import './answerDetail.css';
 import AnswerItem from '../AnswerItem';
 
 import Loading from '../Loading';
+import { useDispatch } from 'react-redux';
+import { addNewAnswer } from '../../features/exam/answerSlice';
 
-const AnswerDetail = ({ answer, loading }) => {
+const AnswerDetail = ({ answer, loading, questionId }) => {
   const answerInputRef = useRef(null);
   const [isAddAnswer, setIsAddAnswer] = useState(false);
   const [newAnswer, setNewAnswer] = useState('');
-
+  const dispatch = useDispatch();
   const handleAddAnswer = () => {
     setIsAddAnswer(!isAddAnswer);
   };
   const handleNewAnswer = (e) => {
     setNewAnswer(e.target.value);
   };
-  const addNewAnswer = () => {
+  const addAnswer = () => {
     if (newAnswer === '') {
       answerInputRef.current.style.borderColor = 'red';
       return;
     }
+    dispatch(addNewAnswer({ question_id: questionId, answer: newAnswer, correct: false }));
     setNewAnswer('');
     handleAddAnswer();
   };
@@ -53,7 +56,7 @@ const AnswerDetail = ({ answer, loading }) => {
                 onChange={handleNewAnswer}
               ></textarea>
               <div className='answerDetail__control'>
-                <button onClick={addNewAnswer}>Lưu</button>
+                <button onClick={addAnswer}>Lưu</button>
                 <button onClick={handleAddAnswer}>Hủy</button>
               </div>
             </div>

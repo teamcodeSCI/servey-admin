@@ -73,7 +73,7 @@ const QuestionDetailItem = (props) => {
           ></button>
         </div>
       </div>
-      {props.index === props.idx && <AnswerDetail answer={answer} loading={answerLoading} />}
+      {props.index === props.idx && <AnswerDetail answer={answer} questionId={props.id} loading={answerLoading} />}
       {isDeleteQuestion && <ConfirmModal action={removeQuestion} handleConfirmModal={handleIsDeleteQuestion} />}
     </div>
   );

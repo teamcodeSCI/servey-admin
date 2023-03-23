@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteAnswer, updateAnswer } from '../../features/exam/answerSlice';
 import ConfirmModal from '../ConfirmModal';
 import './answerItem.css';
 
@@ -6,7 +8,7 @@ const AnswerItem = ({ number, answer, isCorrect, questionId, answerId }) => {
   const [isEditAnswer, setIsEditAnswer] = useState(false);
   const [isDeleteAnswer, setIsDeleteAnswer] = useState(false);
   const [editAnswer, setEditAnswer] = useState(answer);
-
+  const dispatch = useDispatch();
   const handleIsEditAnswer = () => {
     setIsEditAnswer(!isEditAnswer);
   };
@@ -16,10 +18,14 @@ const AnswerItem = ({ number, answer, isCorrect, questionId, answerId }) => {
   const handleIsDeleteAnswer = () => {
     setIsDeleteAnswer(!isDeleteAnswer);
   };
-  const deleteAnswer = () => {
+  const removeAnswer = () => {
+    dispatch(deleteAnswer(answerId));
     handleIsDeleteAnswer();
   };
-
+  const saveAnswer = () => {
+    dispatch(updateAnswer({ id: answerId, payload: editAnswer }));
+    handleIsEditAnswer();
+  };
   return (
     <li
       className='answerItem'
@@ -49,7 +55,7 @@ const AnswerItem = ({ number, answer, isCorrect, questionId, answerId }) => {
       <div className='answerItem__control' style={isEditAnswer ? { display: 'flex' } : {}}>
         {isEditAnswer ? (
           <>
-            <button className='answerItem__save' onClick={handleIsEditAnswer}></button>
+            <button className='answerItem__save' onClick={saveAnswer}></button>
             <button className='answerItem__close' onClick={handleIsEditAnswer}></button>
           </>
         ) : (
@@ -57,7 +63,7 @@ const AnswerItem = ({ number, answer, isCorrect, questionId, answerId }) => {
         )}
         <button className='answerItem__delete' onClick={handleIsDeleteAnswer}></button>
       </div>
-      {isDeleteAnswer && <ConfirmModal action={deleteAnswer} handleConfirmModal={handleIsDeleteAnswer} />}
+      {isDeleteAnswer && <ConfirmModal action={removeAnswer} handleConfirmModal={handleIsDeleteAnswer} />}
     </li>
   );
 };
