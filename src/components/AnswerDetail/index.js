@@ -41,7 +41,7 @@ const AnswerDetail = ({ answer, loading, questionId }) => {
               key={item.id}
               number={idx + 1}
               answer={item.answer}
-              questionId={item.questionId}
+              questionId={item.question_id}
               answerId={item.id}
               isCorrect={item.correct}
             />

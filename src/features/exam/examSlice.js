@@ -54,7 +54,11 @@ const examSlice = createSlice({
   },
 });
 export const fetchExam = createAsyncThunk('exam/fetchExam', async ({ filter, pageNum }) => {
-  const response = await fetch(`${baseURL}/exam`);
+  const response = await fetch(`${baseURL}/exam`, {
+    headers: {
+      Authorization: localStorage.getItem('access_token'),
+    },
+  });
   const render = await response.json();
   const exam = render.data;
   const search = removeAccents(filter);
@@ -79,7 +83,7 @@ export const addNewExam = createAsyncThunk('exam/addNewExam', async (newExam) =>
     cache: 'no-cache',
     credentials: 'same-origin',
     headers: {
-      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('access_token'),
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
@@ -96,7 +100,7 @@ export const updateExam = createAsyncThunk('exam/updateExam', async ({ id, paylo
     cache: 'no-cache',
     credentials: 'same-origin',
     headers: {
-      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('access_token'),
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
@@ -113,7 +117,7 @@ export const deleteExam = createAsyncThunk('exam/deleteExam', async (id) => {
     cache: 'no-cache',
     credentials: 'same-origin',
     headers: {
-      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('access_token'),
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',

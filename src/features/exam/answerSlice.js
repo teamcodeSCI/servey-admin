@@ -49,7 +49,11 @@ const answerSlice = createSlice({
   },
 });
 export const fetchAnswer = createAsyncThunk('answer/fetchAnswer', async (questionId) => {
-  const response = await fetch(`${baseURL}/answer?question_id=${questionId}`);
+  const response = await fetch(`${baseURL}/answer?question_id=${questionId}`, {
+    headers: {
+      Authorization: localStorage.getItem('access_token'),
+    },
+  });
   const data = await response.json();
   return data.data;
 });
@@ -60,7 +64,7 @@ export const addNewAnswer = createAsyncThunk('answer/addNewAnswer', async (newAn
     cache: 'no-cache',
     credentials: 'same-origin',
     headers: {
-      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('access_token'),
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
@@ -76,7 +80,7 @@ export const updateAnswer = createAsyncThunk('answer/updateAnswer', async ({ id,
     cache: 'no-cache',
     credentials: 'same-origin',
     headers: {
-      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('access_token'),
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
@@ -92,7 +96,7 @@ export const deleteAnswer = createAsyncThunk('answer/deleteAnswer', async (id) =
     cache: 'no-cache',
     credentials: 'same-origin',
     headers: {
-      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('access_token'),
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',

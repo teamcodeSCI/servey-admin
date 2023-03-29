@@ -32,13 +32,13 @@ const AnswerItem = ({ number, answer, isCorrect, questionId, answerId }) => {
       style={
         isEditAnswer
           ? { background: '#efefef' }
-          : isCorrect === true
+          : isCorrect === '1'
           ? { background: '#b6e5cf' }
           : { background: 'none' }
       }
     >
       <span>
-        <input type='radio' name={questionId} defaultChecked={isCorrect} value={isCorrect} />
+        <input type='radio' name={questionId} defaultChecked={isCorrect === '1'} value={isCorrect === '1'} />
         {number}.
         {isEditAnswer ? (
           <textarea

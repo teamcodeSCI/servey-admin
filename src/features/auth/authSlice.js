@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { baseURL } from '../../utils/const';
 
 const initialState = {
   logged: false,
@@ -16,9 +17,9 @@ const authSlice = createSlice({
       })
       .addCase(getLogin.fulfilled, (state, actions) => {
         state.logging = false;
-        state.currentUser = actions.payload.currentUser;
-        state.message = actions.payload.message;
-        state.logged = actions.payload.logged;
+        state.currentUser = actions.payload.data;
+        state.logged = actions.payload.status;
+        state.message = actions.payload;
       })
       .addCase(getLogin.rejected, (state, actions) => {
         state.logging = false;
@@ -40,19 +41,24 @@ const authSlice = createSlice({
   },
 });
 export const getLogin = createAsyncThunk('auth/getLogin', async (info) => {
-  const response = await fetch('https://jsonplaceholder.typicode.com/users');
+  const response = await fetch(`${baseURL}/login`, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    body: JSON.stringify(info),
+  });
   const data = await response.json();
-
-  const user = data.find((item) => item.username === info.phone);
-  if (!user) {
-    return { logged: false, message: 'Sai số điện thoại hoặc mật khẩu' };
+  if (data.error) {
+    return data.error;
   }
-  if (info.password !== '123123') {
-    return { logged: false, message: 'Sai số điện thoại hoặc mật khẩu' };
-  }
-  localStorage.setItem('access_token', user.phone);
-
-  return { logged: true, message: 'Đăng nhập thành công', currentUser: user };
+  localStorage.setItem('access_token', data.data.token);
+  return data;
 });
 export const getLogout = createAsyncThunk('auth/getLogout', async () => {
   localStorage.clear();

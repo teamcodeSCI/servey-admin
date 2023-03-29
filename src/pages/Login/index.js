@@ -13,7 +13,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [login, setLogin] = useState({ phonenumber: '', password: '' });
+  const [login, setLogin] = useState({ email: '', password: '' });
   const [note, setNote] = useState('');
   const message = useSelector(messageSelector);
   const logged = useSelector(loggedSelector);
@@ -24,11 +24,11 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    if (login.phonenumber === '' || login.password === '') {
+    if (login.email === '' || login.password === '') {
       setNote('Vui Lòng nhập đủ thông tin');
       return;
     }
-    dispatch(getLogin({ phone: login.phonenumber, password: login.password }));
+    dispatch(getLogin({ email: login.email, password: login.password }));
   };
   useEffect(() => {
     if (localStorage.getItem('access_token')) navigate(`${URL}/`);
@@ -49,13 +49,7 @@ const Login = () => {
               <div className='login__icon'>
                 <img width={15} height={15} src={phoneIcon} alt='' />
               </div>
-              <input
-                type='text'
-                name='phonenumber'
-                placeholder='Số điện thoại'
-                onChange={changeInputVal}
-                value={login.phonenumber}
-              />
+              <input type='text' name='email' placeholder='Email' onChange={changeInputVal} value={login.email} />
             </div>
             <div className='login__input'>
               <div className='login__icon'>
