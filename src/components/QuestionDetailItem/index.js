@@ -33,7 +33,7 @@ const QuestionDetailItem = (props) => {
     setQuestion(e.target.value);
   };
   const saveQuestion = () => {
-    dispatch(updateQuestion({ id: props.id, payload: question }));
+    dispatch(updateQuestion({ id: props.id, payload: { question: question } }));
     handleIsEditQuestion();
   };
   const removeQuestion = () => {
@@ -73,7 +73,14 @@ const QuestionDetailItem = (props) => {
           ></button>
         </div>
       </div>
-      {props.index === props.idx && <AnswerDetail answer={answer} questionId={props.id} loading={answerLoading} />}
+      {props.index === props.idx && (
+        <AnswerDetail
+          correctAnswer={props.correct_answer}
+          answer={answer}
+          questionId={props.id}
+          loading={answerLoading}
+        />
+      )}
       {isDeleteQuestion && <ConfirmModal action={removeQuestion} handleConfirmModal={handleIsDeleteQuestion} />}
     </div>
   );

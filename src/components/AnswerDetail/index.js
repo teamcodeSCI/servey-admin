@@ -7,7 +7,7 @@ import Loading from '../Loading';
 import { useDispatch } from 'react-redux';
 import { addNewAnswer } from '../../features/exam/answerSlice';
 
-const AnswerDetail = ({ answer, loading, questionId }) => {
+const AnswerDetail = ({ answer, loading, questionId, correctAnswer }) => {
   const answerInputRef = useRef(null);
   const [isAddAnswer, setIsAddAnswer] = useState(false);
   const [newAnswer, setNewAnswer] = useState('');
@@ -23,7 +23,7 @@ const AnswerDetail = ({ answer, loading, questionId }) => {
       answerInputRef.current.style.borderColor = 'red';
       return;
     }
-    dispatch(addNewAnswer({ question_id: questionId, answer: newAnswer, correct: false }));
+    dispatch(addNewAnswer({ question_id: questionId, answer: newAnswer }));
     setNewAnswer('');
     handleAddAnswer();
   };
@@ -43,7 +43,8 @@ const AnswerDetail = ({ answer, loading, questionId }) => {
               answer={item.answer}
               questionId={item.question_id}
               answerId={item.id}
-              isCorrect={item.correct}
+              isCorrect={correctAnswer === item.answer}
+              correctAnswer={correctAnswer}
             />
           ))}
           {isAddAnswer ? (

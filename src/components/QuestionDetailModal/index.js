@@ -25,7 +25,7 @@ const QuestionDetailModal = ({ handleQuestionDetailModal, questionRender, examId
       inputRef.current.style.borderColor = 'red';
       return;
     }
-    dispatch(addNewQuestion({ exam_id: examId, question: question }));
+    dispatch(addNewQuestion({ exam_id: examId, question: question,correct_answer:'' }));
     handleAddQuestion();
   };
   const handleAddQuestion = () => {

@@ -52,6 +52,8 @@ export const fetchQuestion = createAsyncThunk('question/fetchQuestion', async (e
   const response = await fetch(`${baseURL}/question?exam_id=${examId}`, {
     headers: {
       Authorization: localStorage.getItem('access_token'),
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
   });
   const data = await response.json();
@@ -65,6 +67,8 @@ export const addNewQuestion = createAsyncThunk('question/addNewQuestion', async 
     credentials: 'same-origin',
     headers: {
       Authorization: localStorage.getItem('access_token'),
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
@@ -81,10 +85,12 @@ export const updateQuestion = createAsyncThunk('question/updateQuestion', async 
     credentials: 'same-origin',
     headers: {
       Authorization: localStorage.getItem('access_token'),
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
-    body: JSON.stringify({ question: payload }),
+    body: JSON.stringify(payload),
   });
   const data = await response.json();
   return data.data;
@@ -97,6 +103,8 @@ export const deleteQuestion = createAsyncThunk('question/deleteQuestion', async 
     credentials: 'same-origin',
     headers: {
       Authorization: localStorage.getItem('access_token'),
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',

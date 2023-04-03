@@ -3,11 +3,13 @@ import { useDispatch } from 'react-redux';
 import { deleteAnswer, updateAnswer } from '../../features/exam/answerSlice';
 import ConfirmModal from '../ConfirmModal';
 import './answerItem.css';
+import { updateQuestion } from '../../features/exam/questionSlice';
 
-const AnswerItem = ({ number, answer, isCorrect, questionId, answerId }) => {
+const AnswerItem = (props) => {
   const [isEditAnswer, setIsEditAnswer] = useState(false);
   const [isDeleteAnswer, setIsDeleteAnswer] = useState(false);
-  const [editAnswer, setEditAnswer] = useState(answer);
+  const [editAnswer, setEditAnswer] = useState(props.answer);
+
   const dispatch = useDispatch();
   const handleIsEditAnswer = () => {
     setIsEditAnswer(!isEditAnswer);
@@ -19,27 +21,33 @@ const AnswerItem = ({ number, answer, isCorrect, questionId, answerId }) => {
     setIsDeleteAnswer(!isDeleteAnswer);
   };
   const removeAnswer = () => {
-    dispatch(deleteAnswer(answerId));
+    dispatch(deleteAnswer(props.answerId));
     handleIsDeleteAnswer();
   };
   const saveAnswer = () => {
-    dispatch(updateAnswer({ id: answerId, payload: editAnswer }));
+    dispatch(updateAnswer({ id: props.answerId, payload: editAnswer }));
     handleIsEditAnswer();
+  };
+
+  const handleCorrectAnswer = (e) => {
+    dispatch(updateQuestion({ id: props.questionId, payload: { correct_answer: e.target.value } }));
   };
   return (
     <li
       className='answerItem'
       style={
-        isEditAnswer
-          ? { background: '#efefef' }
-          : isCorrect === '1'
-          ? { background: '#b6e5cf' }
-          : { background: 'none' }
+        isEditAnswer ? { background: '#efefef' } : props.isCorrect ? { background: '#b6e5cf' } : { background: 'none' }
       }
     >
       <span>
-        <input type='radio' name={questionId} defaultChecked={isCorrect === '1'} value={isCorrect === '1'} />
-        {number}.
+        <input
+          type='radio'
+          name={props.questionId}
+          checked={props.isCorrect}
+          value={props.answer}
+          onChange={handleCorrectAnswer}
+        />
+        {props.number}.
         {isEditAnswer ? (
           <textarea
             rows='1'
