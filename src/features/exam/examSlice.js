@@ -65,7 +65,7 @@ export const fetchExam = createAsyncThunk('exam/fetchExam', async({ filter, page
     const exam = render.data;
     const search = removeAccents(filter);
     const paginationLimit = 10;
-    const data = search === '' ? exam : exam.filter((item) => removeAccents(item.name).search(search) !== -1);
+    const data = search === '' ? exam : exam.filter((item) => removeAccents(item.exam).search(search) !== -1);
     const pageCount = Math.ceil(data.length / paginationLimit);
 
     const prevRange = (pageNum - 1) * paginationLimit;
