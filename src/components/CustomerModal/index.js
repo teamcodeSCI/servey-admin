@@ -4,20 +4,23 @@ import closeIcon from '../../assets/icons/close-icon.svg';
 import { useOutside } from '../../utils/help';
 import CustomerQuestionItem from '../CustomerQuestionItem';
 
-const CustomerModal = ({ handleOpenModal }) => {
+const CustomerModal = (props) => {
   const modalRef = useRef(null);
-  useOutside(modalRef, handleOpenModal);
+  useOutside(modalRef, props.handleOpenModal);
   return (
     <div className='customerModal'>
       <div className='customerModal__box' ref={modalRef}>
         <div className='customerModal__header'>
-          <span>Câu hỏi trắc nghiệm về JS</span>2 Câu hỏi
+          <span>{props.exam}</span>
+          {props.question.length} Câu hỏi
         </div>
-        <div class='customerModal__close' onClick={handleOpenModal}>
+        <div className='customerModal__close' onClick={props.handleOpenModal}>
           <img width={20} height={20} src={closeIcon} alt='' />
         </div>
         <div className='customerModal__body'>
-          <CustomerQuestionItem />
+          {props.question.map((item, idx) => (
+            <CustomerQuestionItem key={item.id} idx={idx + 1} {...item} />
+          ))}
         </div>
       </div>
     </div>

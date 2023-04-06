@@ -1,21 +1,32 @@
 import React, { useState } from 'react';
-import CustomerModal from '../CustomerModal';
-import './customerItem.css';
 
-const CustomerItem = ({ ip, exam, answered }) => {
-  const [isOpenModal, setIsOpenModal] = useState(false);
-  const handleOpenModal = () => {
-    setIsOpenModal(!isOpenModal);
+import './customerItem.css';
+import CustomerAccItem from '../CustomerAccItem';
+
+const CustomerItem = (props) => {
+  const [isOpenAcc, setIsOpenAcc] = useState(false);
+
+  const handleOpenAcc = () => {
+    setIsOpenAcc(!isOpenAcc);
   };
+
   return (
-    <>
-      <div className='customerItem' onClick={handleOpenModal}>
-        <div className='customerItem__ip'>{ip}</div>
-        <div className='customerItem__exam'>{exam}</div>
-        <div className='customerItem__answered'>{answered} Câu hỏi</div>
+    <div className='customerItem'>
+      <div className='customerItem__title' onClick={handleOpenAcc}>
+        <div className='customerItem__ip'>{props.ip}</div>
+        <div className='customerItem__number'>{props.exam.length} Chủ đề</div>
+        <div className='customerItem__viewMore'>
+          <button style={isOpenAcc ? { transform: 'rotate(180deg)' } : {}}></button>
+        </div>
       </div>
-      {isOpenModal && <CustomerModal handleOpenModal={handleOpenModal} />}
-    </>
+      {isOpenAcc && (
+        <div className='customerItem__acc'>
+          {props.exam.map((item) => (
+            <CustomerAccItem key={item.exam_id} {...item} />
+          ))}
+        </div>
+      )}
+    </div>
   );
 };
 

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './customerQuestionItem.css';
+import CustomerModalAccItem from '../CustomerModalAccItem';
 
-const CustomerQuestionItem = () => {
+const CustomerQuestionItem = (props) => {
   const [isOpenAcc, setIsOpenAcc] = useState(false);
   const handleOpenAcc = () => {
     setIsOpenAcc(!isOpenAcc);
@@ -9,7 +10,9 @@ const CustomerQuestionItem = () => {
   return (
     <div className='customerQuestionItem'>
       <div className='customerQuestionItem__card'>
-        <div className='customerQuestionItem__title'>1. Javascript?</div>
+        <div className='customerQuestionItem__title'>
+          {props.idx}. {props.question}
+        </div>
         <div className='customerQuestionItem__btn'>
           <button onClick={handleOpenAcc} style={!isOpenAcc ? { transform: 'rotate(-180deg)' } : {}}></button>
         </div>
@@ -17,10 +20,15 @@ const CustomerQuestionItem = () => {
       {!isOpenAcc && (
         <div className='customerQuestionItem__acc'>
           <ul>
-            <li>1. asdasd</li>
-            <li>2. asdasd</li>
-            <li>3. asdasd</li>
-            <li>4. asdasd</li>
+            {props.answers.map((item, idx) => (
+              <CustomerModalAccItem
+                key={idx}
+                idx={idx + 1}
+                answer={item}
+                correctAnswer={props.correct_answer}
+                customerAnswer={props.answer}
+              />
+            ))}
           </ul>
         </div>
       )}

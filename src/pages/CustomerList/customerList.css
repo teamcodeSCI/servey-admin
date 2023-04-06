@@ -10,3 +10,13 @@
     margin-bottom: 20px;
     max-width: 219px;
 }
+.customerList__loading{
+    display: flex;
+    justify-content: center;
+
+}
+.customerList__table{
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}

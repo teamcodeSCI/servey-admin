@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useEffect, useState } from 'react';
 import CustomerItem from '../../components/CustomerItem';
 import Search from '../../components/Search';
-import './customerList.css';
+import Loading from '../../components/Loading';
 
-const data = [
-  { _id: uuidv4(), ip: '127.0.0.1', exam: 'Câu hỏi trắc nghiệm về JS', answered: '5' },
-  { _id: uuidv4(), ip: '192.168.0.20', exam: 'Câu hỏi trắc nghiệm về PHP', answered: '2' },
-  { _id: uuidv4(), ip: '192.168.1.21', exam: 'Câu hỏi trắc nghiệm về C#', answered: '4' },
-  { _id: uuidv4(), ip: '127.0.10.10', exam: 'Câu hỏi trắc nghiệm về React', answered: '9' },
-  { _id: uuidv4(), ip: '127.50.0.1', exam: 'Câu hỏi trắc nghiệm về Java', answered: '10' },
-];
+import './customerList.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCustomer } from '../../features/customer/customerApi';
+import { customerLoadingSelector, customerSelector } from '../../features/customer/customerSlice';
+
 const CustomerList = () => {
+  const dispatch = useDispatch();
   const [search, setSearch] = useState('');
+  const customerList = useSelector(customerSelector);
+
+  const loading = useSelector(customerLoadingSelector);
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
+  useEffect(() => {
+    dispatch(fetchCustomer({ filter: search, pageNum: 1 }));
+  }, [dispatch, search]);
   return (
     <div className='customerList'>
       <div className='customerList__header'>
@@ -25,11 +29,17 @@ const CustomerList = () => {
       <div className='customerList__search'>
         <Search placeholder='Tìm kiếm theo IP ...' search={search} handleSearch={handleSearch} />
       </div>
-      <div className='customerList__table'>
-        {data.map((item) => (
-          <CustomerItem key={item._id} {...item} />
-        ))}
-      </div>
+      {loading ? (
+        <div className='customerList__loading'>
+          <Loading borderTopColor='#227ff4' size={40} />
+        </div>
+      ) : (
+        <div className='customerList__table'>
+          {customerList.map((item) => (
+            <CustomerItem key={item.ip} {...item} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

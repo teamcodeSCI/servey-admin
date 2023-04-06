@@ -1,0 +1,27 @@
+.customerModalAccItem__true{
+    background: rgb(182, 229, 207) !important;
+    position: relative;
+}
+.customerModalAccItem__true::after{
+    content:'';
+    position: absolute;
+    background: url(../../assets/icons/check-greenIcon.svg) center 0 no-repeat;
+    background-size: 100%;
+    width: 20px;
+    height: 20px;
+    right: 10px;
+}
+.customerModalAccItem__false{
+    background: #ffa9a9 !important;
+    position: relative;
+    
+}
+.customerModalAccItem__false::after{
+    content:'';
+    position: absolute;
+    background: url(../../assets/icons/closeActive-icon.svg) center 0 no-repeat;
+    background-size: 100%;
+    width: 20px;
+    height: 20px;
+    right: 10px;
+}

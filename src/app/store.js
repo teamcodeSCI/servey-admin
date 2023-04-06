@@ -4,6 +4,7 @@ import answerReducer from '../features/exam/answerSlice';
 import examReducer from '../features/exam/examSlice';
 import questionReducer from '../features/exam/questionSlice';
 import userReducer from '../features/user/userSlice';
+import customerReducer from '../features/customer/customerSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   exam: examReducer,
   question: questionReducer,
   answer: answerReducer,
+  customer: customerReducer,
 });
 
 const store = configureStore({

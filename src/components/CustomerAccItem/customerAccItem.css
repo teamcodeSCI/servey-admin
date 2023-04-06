@@ -1,0 +1,19 @@
+
+.customerAccItem>ul{
+    display: flex;
+    list-style: none;
+    margin: 0;
+    align-items: center;
+   cursor: pointer;
+    padding: 5px 20px;
+    border-radius: 9px;
+    gap: 10px;
+    transition: all0.1s linear;
+}
+.customcustomerAccItemerItem__acc>ul:hover{
+    background: #efefef;
+
+}
+.customerAccItem>ul>li{
+    width: 50%;
+}

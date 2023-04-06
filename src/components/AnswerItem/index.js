@@ -35,9 +35,7 @@ const AnswerItem = (props) => {
   return (
     <li
       className='answerItem'
-      style={
-        isEditAnswer ? { background: '#efefef' } : props.isCorrect ? { background: '#b6e5cf' } : { background: 'none' }
-      }
+      style={isEditAnswer ? { background: '#efefef' } : props.isCorrect ? { background: '#b6e5cf' } : {}}
     >
       <span>
         <input
