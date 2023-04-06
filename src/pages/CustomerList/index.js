@@ -2,17 +2,26 @@ import React, { useEffect, useState } from 'react';
 import CustomerItem from '../../components/CustomerItem';
 import Search from '../../components/Search';
 import Loading from '../../components/Loading';
+import Pagination from '../../components/Pagination';
 
 import './customerList.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCustomer } from '../../features/customer/customerApi';
-import { customerLoadingSelector, customerSelector } from '../../features/customer/customerSlice';
+import {
+  customerLoadingSelector,
+  customerSelector,
+  pageCountSelector,
+  rangeSelector,
+} from '../../features/customer/customerSlice';
 
 const CustomerList = () => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
   const customerList = useSelector(customerSelector);
+  const [pageNum, setPageNum] = useState(1);
+  const range = useSelector(rangeSelector);
 
+  const pageCount = useSelector(pageCountSelector);
   const loading = useSelector(customerLoadingSelector);
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -40,6 +49,9 @@ const CustomerList = () => {
           ))}
         </div>
       )}
+      <div className='customerList__pagination'>
+        <Pagination pageNum={pageNum} setPageNum={setPageNum} pageCount={pageCount} range={range} />
+      </div>
     </div>
   );
 };

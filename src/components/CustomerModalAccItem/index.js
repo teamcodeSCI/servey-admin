@@ -1,7 +1,6 @@
 import React from 'react';
 import './customerModalAccItem.css';
 const CustomerModalAccItem = (props) => {
-  console.log('props: ', props);
   return (
     <li
       className={
