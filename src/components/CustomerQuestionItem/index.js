@@ -22,9 +22,9 @@ const CustomerQuestionItem = (props) => {
           <ul>
             {props.answers.map((item, idx) => (
               <CustomerModalAccItem
-                key={idx}
+                key={item.id}
                 idx={idx + 1}
-                answer={item}
+                answer={item.answer}
                 correctAnswer={props.correct_answer}
                 customerAnswer={props.answer}
               />

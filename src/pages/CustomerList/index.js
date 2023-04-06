@@ -42,16 +42,20 @@ const CustomerList = () => {
         <div className='customerList__loading'>
           <Loading borderTopColor='#227ff4' size={40} />
         </div>
-      ) : (
+      ) : pageCount !== 0 ? (
         <div className='customerList__table'>
           {customerList.map((item) => (
             <CustomerItem key={item.ip} {...item} />
           ))}
         </div>
+      ) : (
+        <p style={{ textAlign: 'center' }}>Không có dữ liệu</p>
       )}
-      <div className='customerList__pagination'>
-        <Pagination pageNum={pageNum} setPageNum={setPageNum} pageCount={pageCount} range={range} />
-      </div>
+      {pageCount !== 0 && (
+        <div className='customerList__pagination'>
+          <Pagination pageNum={pageNum} setPageNum={setPageNum} pageCount={pageCount} range={range} />
+        </div>
+      )}
     </div>
   );
 };
