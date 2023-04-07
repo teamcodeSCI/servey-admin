@@ -75,6 +75,7 @@ const QuestionDetailItem = (props) => {
       </div>
       {props.index === props.idx && (
         <AnswerDetail
+          explain={props.explain}
           correctAnswer={props.correct_answer}
           answer={answer}
           questionId={props.id}

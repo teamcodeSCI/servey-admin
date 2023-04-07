@@ -92,7 +92,9 @@ export const updateQuestion = createAsyncThunk('question/updateQuestion', async 
     referrerPolicy: 'no-referrer',
     body: JSON.stringify(payload),
   });
+
   const data = await response.json();
+
   return data.data;
 });
 export const deleteQuestion = createAsyncThunk('question/deleteQuestion', async (id) => {

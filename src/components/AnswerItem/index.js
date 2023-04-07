@@ -45,7 +45,7 @@ const AnswerItem = (props) => {
           value={props.answer}
           onChange={handleCorrectAnswer}
         />
-        {props.number}.
+        {props.number}.{' '}
         {isEditAnswer ? (
           <textarea
             rows='1'

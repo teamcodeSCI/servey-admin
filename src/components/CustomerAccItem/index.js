@@ -8,19 +8,29 @@ const CustomerAccItem = (props) => {
   const handleOpenModal = () => {
     setIsOpenModal(!isOpenModal);
   };
+  let count = 0;
+  props.question.forEach((e) => {
+    if (e.correct_answer === e.answer) {
+      count++;
+    }
+  });
   return (
     <>
       <div className='customerAccItem' onClick={handleOpenModal}>
         <ul>
           <li className='customerAccItem__name'>{props.exam}</li>
           <li className='customerAccItem__date'>{formatDate(props.created_at)}</li>
-          <li className='customerAccItem__question'>{props.question.length} Câu hỏi</li>
+          <li className='customerAccItem__question'>
+            {count}/{props.question.length} Câu đúng
+          </li>
         </ul>
         <div className='customerAccItem__btn'>
           <button></button>
         </div>
       </div>
-      {isOpenModal && <CustomerModal handleOpenModal={handleOpenModal} exam={props.exam} question={props.question} />}
+      {isOpenModal && (
+        <CustomerModal handleOpenModal={handleOpenModal} exam={props.exam} count={count} question={props.question} />
+      )}
     </>
   );
 };

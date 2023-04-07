@@ -7,12 +7,13 @@ import CustomerQuestionItem from '../CustomerQuestionItem';
 const CustomerModal = (props) => {
   const modalRef = useRef(null);
   useOutside(modalRef, props.handleOpenModal);
+
   return (
     <div className='customerModal'>
       <div className='customerModal__box' ref={modalRef}>
         <div className='customerModal__header'>
           <span>{props.exam}</span>
-          {props.question.length} Câu hỏi
+          Kết quả: {props.count}/{props.question.length} câu
         </div>
         <div className='customerModal__close' onClick={props.handleOpenModal}>
           <img width={20} height={20} src={closeIcon} alt='' />

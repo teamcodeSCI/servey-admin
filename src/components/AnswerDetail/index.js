@@ -6,12 +6,23 @@ import AnswerItem from '../AnswerItem';
 import Loading from '../Loading';
 import { useDispatch } from 'react-redux';
 import { addNewAnswer } from '../../features/exam/answerSlice';
+import { updateQuestion } from '../../features/exam/questionSlice';
 
-const AnswerDetail = ({ answer, loading, questionId, correctAnswer }) => {
+const AnswerDetail = ({ answer, loading, questionId, correctAnswer, explain }) => {
+  const dispatch = useDispatch();
   const answerInputRef = useRef(null);
   const [isAddAnswer, setIsAddAnswer] = useState(false);
   const [newAnswer, setNewAnswer] = useState('');
-  const dispatch = useDispatch();
+  const [explainText, setExplainText] = useState(explain === null ? '' : explain);
+
+  const [isOpenExplain, setIsOpenExplain] = useState(false);
+
+  const handleOpenExplain = () => {
+    setIsOpenExplain(!isOpenExplain);
+  };
+  const handleExplain = (e) => {
+    setExplainText(e.target.value);
+  };
   const handleAddAnswer = () => {
     setIsAddAnswer(!isAddAnswer);
   };
@@ -27,7 +38,10 @@ const AnswerDetail = ({ answer, loading, questionId, correctAnswer }) => {
     setNewAnswer('');
     handleAddAnswer();
   };
-
+  const updateExplain = () => {
+    dispatch(updateQuestion({ id: questionId, payload: { explain: explainText } }));
+    handleOpenExplain();
+  };
   return (
     <div className='answerDetail'>
       {loading ? (
@@ -35,38 +49,59 @@ const AnswerDetail = ({ answer, loading, questionId, correctAnswer }) => {
           <Loading size={30} borderColor={'#f2f2f2'} borderTopColor={'#227ff4'} />
         </div>
       ) : (
-        <ul>
-          {answer.map((item, idx) => (
-            <AnswerItem
-              key={item.id}
-              number={idx + 1}
-              answer={item.answer}
-              questionId={item.question_id}
-              answerId={item.id}
-              isCorrect={correctAnswer === item.answer}
-              correctAnswer={correctAnswer}
-            />
-          ))}
-          {isAddAnswer ? (
-            <div className='answerDetail__editting'>
-              <textarea
-                rows={1}
-                ref={answerInputRef}
-                placeholder='Nhập câu hỏi ...'
-                value={newAnswer}
-                onChange={handleNewAnswer}
-              ></textarea>
-              <div className='answerDetail__control'>
-                <button onClick={addAnswer}>Lưu</button>
-                <button onClick={handleAddAnswer}>Hủy</button>
+        <div className='answerDetail__box'>
+          <div className='answerDetail__explain'>
+            {isOpenExplain ? (
+              <textarea onChange={handleExplain} value={explainText} rows={1} placeholder='Giải thích ...'></textarea>
+            ) : (
+              <p>
+                <b>Giải thích:</b> {explainText}
+              </p>
+            )}
+            <div className='answerDetail__control'>
+              {isOpenExplain ? (
+                <>
+                  <button onClick={updateExplain}>Lưu</button>
+                  <button onClick={handleOpenExplain}>Hủy</button>
+                </>
+              ) : (
+                <button className='answerDetail__editExplain' onClick={handleOpenExplain}></button>
+              )}
+            </div>
+          </div>
+          <ul>
+            {answer.map((item, idx) => (
+              <AnswerItem
+                key={item.id}
+                number={idx + 1}
+                answer={item.answer}
+                questionId={item.question_id}
+                answerId={item.id}
+                isCorrect={correctAnswer === item.answer}
+                correctAnswer={correctAnswer}
+              />
+            ))}
+            {isAddAnswer ? (
+              <div className='answerDetail__editting'>
+                <textarea
+                  rows={1}
+                  ref={answerInputRef}
+                  placeholder='Nhập trả lời ...'
+                  value={newAnswer}
+                  onChange={handleNewAnswer}
+                ></textarea>
+                <div className='answerDetail__control'>
+                  <button onClick={addAnswer}>Lưu</button>
+                  <button onClick={handleAddAnswer}>Hủy</button>
+                </div>
               </div>
-            </div>
-          ) : (
-            <div className='answerDetail__addNewBtn'>
-              <button onClick={handleAddAnswer}>+</button>
-            </div>
-          )}
-        </ul>
+            ) : (
+              <div className='answerDetail__addNewBtn'>
+                <button onClick={handleAddAnswer}>+</button>
+              </div>
+            )}
+          </ul>
+        </div>
       )}
     </div>
   );
