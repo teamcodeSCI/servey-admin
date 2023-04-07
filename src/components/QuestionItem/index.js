@@ -27,7 +27,9 @@ const QuestionItem = (props) => {
   return (
     <>
       <div className='questionItem'>
-        <div className='questionItem__title'>{props.exam}</div>
+        <div className='questionItem__title'>
+          [{props.id}] {props.exam}
+        </div>
         <div className='questionItem__number'>{props.question} câu hỏi</div>
         <div className='questionItem__action'>
           <button className='questionItem__edit' onClick={handleQuestionDetailModal}></button>
