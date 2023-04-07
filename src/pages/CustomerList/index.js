@@ -33,7 +33,7 @@ const CustomerList = () => {
     <div className='customerList'>
       <div className='customerList__header'>
         <span>Danh sách khách hàng</span>
-        10 khách hàng
+        {customerList.length} khách hàng
       </div>
       <div className='customerList__search'>
         <Search placeholder='Tìm kiếm theo IP ...' search={search} handleSearch={handleSearch} />
@@ -43,18 +43,18 @@ const CustomerList = () => {
           <Loading borderTopColor='#227ff4' size={40} />
         </div>
       ) : pageCount !== 0 ? (
-        <div className='customerList__table'>
-          {customerList.map((item) => (
-            <CustomerItem key={item.ip} {...item} />
-          ))}
-        </div>
+        <>
+          <div className='customerList__table'>
+            {customerList.map((item) => (
+              <CustomerItem key={item.ip} {...item} />
+            ))}
+          </div>
+          <div className='customerList__pagination'>
+            <Pagination pageNum={pageNum} setPageNum={setPageNum} pageCount={pageCount} range={range} />
+          </div>
+        </>
       ) : (
         <p style={{ textAlign: 'center' }}>Không có dữ liệu</p>
-      )}
-      {pageCount !== 0 && (
-        <div className='customerList__pagination'>
-          <Pagination pageNum={pageNum} setPageNum={setPageNum} pageCount={pageCount} range={range} />
-        </div>
       )}
     </div>
   );

@@ -33,3 +33,10 @@ export const removeAccents = (str) => {
     .replace(/đ/g, 'd')
     .replace(/Đ/g, 'D');
 };
+export const formatDate = (date) => {
+  if (date) {
+    const newDate = new Date(date);
+    return `${newDate.getDate()}/${newDate.getMonth() + 1}/${newDate.getFullYear()}`;
+  }
+  return '';
+};

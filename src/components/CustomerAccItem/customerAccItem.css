@@ -1,4 +1,7 @@
 
+.customerAccItem{
+    position: relative;
+}
 .customerAccItem>ul{
     display: flex;
     list-style: none;
@@ -14,6 +17,28 @@
 .customerAccItem>ul:hover{
     background: #d5e8ff;
 }
-.customerAccItem>ul>li{
-    width: 50%;
+.customerAccItem__name{
+    width: 40%;
+}.customerAccItem__question{
+    width: 20%;
+}.customerAccItem__date{
+    width: 40%;
+}
+.customerAccItem__btn{
+    position: absolute;
+    right: 10px;
+    top:50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+}
+.customerAccItem__btn>button{
+    background: url(../../assets/icons/dots-icon.svg) center 0 no-repeat;
+    background-size: 100%;
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
 }
