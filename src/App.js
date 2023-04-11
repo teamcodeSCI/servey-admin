@@ -21,8 +21,8 @@ function App() {
           <Route key={item.path} path={item.path} element={item.component} />
         ))}
       </Route>
-
-      <Route path={URL} element={<Navigate to={`${URL}/`} />} />
+      <Route path={'/'} element={<Navigate to={`${URL}`} />} />
+      <Route path={'*'} element={<Navigate to={`${URL}`} />} />
     </Routes>
   );
 }
