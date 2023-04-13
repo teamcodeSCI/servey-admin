@@ -21,8 +21,9 @@ function App() {
           <Route key={item.path} path={item.path} element={item.component} />
         ))}
       </Route>
-      <Route path={'/'} element={<Navigate to={`${URL}`} />} />
-      <Route path={'*'} element={<Navigate to={`${URL}`} />} />
+
+      <Route path={'/'} element={<Navigate to={`${URL}/question`} />} />
+      <Route path={'*'} element={<Navigate to={`${URL}/question`} />} />
     </Routes>
   );
 }
