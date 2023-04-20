@@ -1,0 +1,12 @@
+.report__header{
+    margin-bottom: 20px;
+}
+.report__header>span{
+    font-size: 26px;
+    font-weight: 500;
+    display: block;
+}
+.report__search{
+    margin-bottom: 20px;
+    max-width: 250px;
+}

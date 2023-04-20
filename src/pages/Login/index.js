@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './login.css';
-import loginPic from '../../assets/images/login-pic.webp';
+import loginPic from '../../assets/images/logo.svg';
 import phoneIcon from '../../assets/icons/phone-icon.svg';
 import lockIcon from '../../assets/icons/lock-icon.svg';
 import { useDispatch, useSelector } from 'react-redux';
@@ -67,7 +67,7 @@ const Login = () => {
             <button style={logging ? { background: 'rgb(203 203 203)' } : {}} onClick={handleLogin}>
               {logging ? (
                 <div className='login__loading'>
-                  <Loading size={27} borderTopColor={'#57b846'} />
+                  <Loading size={27} borderTopColor={'#2aa9f3'} />
                 </div>
               ) : (
                 'Đăng nhập'

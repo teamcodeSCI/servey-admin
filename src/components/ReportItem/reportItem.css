@@ -1,0 +1,69 @@
+.reportItem{
+    color: #686868;
+}
+.reportItem__title{
+    display: flex;
+    background: #fff;
+    border-radius: 9px;
+    padding: 10px 20px;
+    transition: all 0.2s linear;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0px 1px 5px 0px rgb(0 0 0 /15%);
+
+}
+.reportItem__title:hover{
+    background: #f3f3f3;
+}
+.reportItem__exam{
+    width: 80%;
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.reportItem__number{
+    width: 20%
+}
+.reportItem__viewMore{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.reportItem__viewMore>button{
+    background: url(../../assets/icons/arrowDown-icon.svg) center 0 no-repeat;
+    background-size: 100%;
+    padding: 0;
+    border: none;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: all 0.2s linear;
+    display: block;
+}
+.reportItem__acc{
+    padding: 10px 0 ;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    gap: 10px;
+    
+}
+.reportItem__acc>ul{
+    display: flex;
+    list-style: none;
+    margin: 0;
+    align-items: center;
+   cursor: pointer;
+    padding: 5px 20px;
+    border-radius: 9px;
+    gap: 10px;
+    transition: all0.1s linear;
+}
+.reportItem__acc>ul:hover{
+    background: #efefef;
+
+}
+.reportItem__acc>ul>li{
+    width: 50%;
+}
